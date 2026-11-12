@@ -1,0 +1,11 @@
+[book]
+title = "大模型多机多卡分布式环境构建"
+authors = ["xigualaoshi"]
+language = "zh-CN"
+
+[output.html]
+pagetoc = true
+additional-css = ["theme/custom.css"]
+additional-js = ["theme/custom.js"]
+[output.html.fold]
+enable = false

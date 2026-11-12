@@ -1,0 +1,698 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>大模型多机多卡分布式环境构建 - 大模型多机多卡分布式环境构建</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-a9fb42da.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-16d5ca3c.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">大模型多机多卡分布式环境构建</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="大模型多机多卡分布式环境构建"><a class="header" href="#大模型多机多卡分布式环境构建">大模型多机多卡分布式环境构建</a></h1>
+<h2 id="1-分布式推理环境构建"><a class="header" href="#1-分布式推理环境构建">1. 分布式推理环境构建</a></h2>
+<h3 id="一-背景描述"><a class="header" href="#一-背景描述">一 背景描述</a></h3>
+<h4 id="11-当前现状"><a class="header" href="#11-当前现状">1.1 当前现状</a></h4>
+<p>我们在部署大模型的时候，如果遇到超大模型的时候，往往一个GPU或者一台服务器的GPU是加载不了完整的模型的，所以我们需要对模型进行分布式部署，比如我们要部署满血版的DeepSeek-v3模型，仅仅部署模型需要1370G的显存，这个时候就必须使用到多机多卡的方式部署。当前演示为了能让所有小伙伴有条件跟着我进行实操，我演示部署Qwen2.5-14B-Instruct的模型，使用4090的显卡（24G显存）。</p>
+<h4 id="12-技术方案"><a class="header" href="#12-技术方案">1.2 技术方案</a></h4>
+<p>采用Ray+vLLM技术方案</p>
+<h5 id="什么是ray"><a class="header" href="#什么是ray">什么是Ray?</a></h5>
+<p>Ray 就是一个“分布式任务调度器”，帮你把一大堆计算任务（比如训练、推理）拆成小块，扔到很多机器上一起跑，速度飞快，还不用你操心怎么协调。</p>
+<p>🧠 举个生活例子：
+想象你在开一个外卖平台，订单（任务）特别多，一个厨房（一台机器）根本做不过来。
+Ray 就像是你的“总调度员”，它会：</p>
+<ul>
+<li>把订单按菜品拆成小任务；</li>
+<li>看哪个厨师（CPU/GPU）空闲，就扔过去；</li>
+<li>如果某个厨师炸了（机器挂了），它立马换人；</li>
+<li>最后把菜（结果）给你端回来，整整齐齐。</li>
+</ul>
+<p>🧰 Ray 在大模型部署里干啥？
+大模型（比如 DeepSeek、LLaMA）动不动就几百 GB，一台机器根本装不下，Ray 就帮你：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">功能</th><th style="text-align: left">大白话解释</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>模型分片</strong></td><td style="text-align: left">把大模型切成几块，分别放在不同 GPU 上，像拼乐高一样。</td></tr>
+<tr><td style="text-align: left"><strong>并行推理</strong></td><td style="text-align: left">很多用户同时提问，Ray 把问题分给不同机器一起回答，响应快。</td></tr>
+<tr><td style="text-align: left"><strong>自动扩缩容</strong></td><td style="text-align: left">用户多了就加机器，用户少了就撤机器，省钱。</td></tr>
+<tr><td style="text-align: left"><strong>容错</strong></td><td style="text-align: left">某台机器挂了，Ray 自动把任务挪到别的机器，用户无感知</td></tr>
+</tbody>
+</table>
+</div>
+<p>🧪 举个实际场景：
+你有一个 DeepSeek-V3 满血版（1.3TB），单卡根本装不下，Ray 会：
+a. 把模型切成 10 份，分别放到 10 张 A100 上；
+b. 用户提问时，Ray 把问题广播给这 10 张卡，大家一起算；
+c. 最后把结果拼起来，返回答案；
+d. 如果某张卡炸了，Ray 立马换一张，继续服务。</p>
+<h5 id="什么是vllm"><a class="header" href="#什么是vllm">什么是vLLM?</a></h5>
+<p>vLLM 是“大模型推理加速器”，一键把模型变成高并发、低延迟的 API 服务，显存省、吞吐猛。</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">项目名称</th><th style="text-align: left">项目特点</th><th style="text-align: left">适合场景</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">Ollama</td><td style="text-align: left">Ollama之所以能够受到最多开发者的关注，一个最根本的原因就是其部署和使用太简单了，兼容多种操作系统，且都提供了一键安装、单命令启动的快捷方式，可以极大降低初学者使用开源大模型的门槛，同时Ollama框架提供原生 RESTAPI和OpenAIAPI兼容性，也可以非常轻松的接入到其他的客户端中。不过项目开发中，支持并发较少。</td><td style="text-align: left">适合个人项目开发适合企业里轻量级的项目</td></tr>
+<tr><td style="text-align: left">llama.cpp</td><td style="text-align: left">llama.cpp是使用没有任何依赖关系的纯C/C++实现，性能很高，可定制化和优化项非常多，但也因为底层是C语言，直接导致上手难度极高。</td><td style="text-align: left">适合企业级项目(但是需要使用的人对C/C++语言熟悉)</td></tr>
+<tr><td style="text-align: left">Vllm</td><td style="text-align: left">Ollama的优势在于其简洁性，那么VIlm则是一个另辟蹊径、优先考虑性能和可扩展性的大模型部署框架，其核心的优化点在高效内存管理、持续批处理功能和张量并行性，从而在生产环境中的高吞吐量场景中表现极佳。</td><td style="text-align: left">适合企业级高并发项目</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="13-主机规划"><a class="header" href="#13-主机规划">1.3 主机规划</a></h4>
+<p>Qwen2.5-14B-Instruct  14 * 2 = 28G ,  GPU 4090(24G)
+当前是用平台为<a href="https://passport.compshare.cn/register">优云智算——注册连接</a></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="image/1-1.PNG" alt="主机规划"><span class="img-wrapper"><img src="image/1-1.PNG" alt="主机规划"></span></label>
+<label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="image/1-2.PNG" alt="主机规划"><span class="img-wrapper"><img src="image/1-2.PNG" alt="主机规划"></span></label></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">主机名</th><th style="text-align: left">内网IP地址</th><th style="text-align: left">GPU个数</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left"><strong>host1</strong></td><td style="text-align: left">10.60.197.243</td><td style="text-align: left">1（4090）</td></tr>
+<tr><td style="text-align: left"><strong>host2</strong></td><td style="text-align: left">10.60.43.107</td><td style="text-align: left">1（4090）</td></tr>
+<tr><td style="text-align: left"><strong>host3</strong></td><td style="text-align: left">10.60.32.65</td><td style="text-align: left">1（4090）</td></tr>
+</tbody>
+</table>
+</div>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="image/1-3.png" alt="主机规划"><span class="img-wrapper"><img src="image/1-3.png" alt="主机规划"></span></label></p>
+<h3 id="二-分布式环境构建"><a class="header" href="#二-分布式环境构建">二 分布式环境构建</a></h3>
+<h4 id="21-主机做免密"><a class="header" href="#21-主机做免密">2.1 主机做免密</a></h4>
+<h5 id="211-做host1和host2host3的免密"><a class="header" href="#211-做host1和host2host3的免密">2.1.1 做host1和host2,host3的免密</a></h5>
+<p>登录host1
+ssh ubuntu@117.50.176.228</p>
+<p>host1上执行
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N “”
+把公钥发给host2
+ssh-copy-id -o StrictHostKeyChecking=no ubuntu@10.60.43.107</p>
+<p>测试链接免密登录host2
+ssh ubuntu@117.50.220.57
+跟host3做免密
+ssh-copy-id -o StrictHostKeyChecking=no ubuntu@10.60.32.65
+测试
+ssh ubuntu@117.50.175.53</p>
+<h5 id="212-host2跟host1host3的免密"><a class="header" href="#212-host2跟host1host3的免密">2.1.2 host2跟host1,host3的免密</a></h5>
+<p>host2上执行
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N “”
+跟host1做免密
+ssh-copy-id -o StrictHostKeyChecking=no ubuntu@10.60.197.243
+跟host3做免密
+ssh-copy-id -o StrictHostKeyChecking=no ubuntu@10.60.32.65</p>
+<h5 id="213-host3跟host1host2的免密"><a class="header" href="#213-host3跟host1host2的免密">2.1.3 host3跟host1,host2的免密</a></h5>
+<p>host3上执行
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N “”
+跟host1做免密
+ssh-copy-id -o StrictHostKeyChecking=no ubuntu@10.60.197.243
+跟host2做免密
+ssh-copy-id -o StrictHostKeyChecking=no ubuntu@10.60.43.107</p>
+<h4 id="22-服务器同步依赖环境"><a class="header" href="#22-服务器同步依赖环境">2.2 服务器同步依赖环境</a></h4>
+<h5 id="221-模型环境构建"><a class="header" href="#221-模型环境构建">2.2.1 模型环境构建</a></h5>
+<p><strong>conda环境安装</strong></p>
+<p>登录host1先安装conda环境</p>
+<pre><code class="language-bash">sudo apt update
+## 安装miniconda
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+更换镜像源  wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-latest-Linux-x86_64.sh
+## 执行脚本
+bash Miniconda3-latest-Linux-x86_64.sh
+#刷新配置文件  source ~/.bashrc
+检验安装状况  conda --version
+</code></pre>
+<p>一键替换为清华源</p>
+<pre><code class="language-bash">conda config --remove-key channels
+
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
+conda config --add channels defaults
+
+conda config --set show_channel_urls true
+</code></pre>
+<p><strong>创建环境</strong>
+conda create -n vllm python=3.11 -y (注意当前环境创建以及之后的设置集群中必须相同)
+conda activate vllm
+当前vllm环境安装ray
+pip install “ray[default]” -i https://pypi.tuna.tsinghua.edu.cn/simple
+当前环境安装vllm
+pip install vllm -i https://pypi.tuna.tsinghua.edu.cn/simple
+安装其他依赖环境
+pip install torch torchvision torchaudio –index-url https://download.pytorch.org/whl/cu121 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install accelerate==0.29.3 -i https://pypi.tuna.tsinghua.edu.cn/simple</p>
+<pre><code class="language-bash">#安装transformers（使用镜像）
+pip install transformers 
+pip install torchaudio==2.5.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install transformers==4.45.2 tokenizers==0.20.3 -i https://pypi.tuna.tsinghua.edu.cn/simple
+#安装其他必要依赖
+pip install requests numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
+python3 -c "
+import sys
+print(f'Python version: {sys.version}')
+try:
+    import torch
+    print(f'✅ PyTorch {torch.__version__} installed')
+    print(f'✅ CUDA available: {torch.cuda.is_available()}')
+    if torch.cuda.is_available():
+        print(f'✅ CUDA version: {torch.version.cuda}')
+except ImportError as e:
+    print(f'❌ PyTorch import failed: {e}')
+try:
+    import ray
+    print(f'✅ Ray {ray.__version__} installed')
+except ImportError as e:
+    print(f'❌ Ray import failed: {e}')
+try:
+    import vllm
+    print(f'✅ vLLM {vllm.__version__} installed')
+except ImportError as e:
+    print(f'❌ vLLM import failed: {e}')
+"
+</code></pre>
+<p><strong>下载模型</strong>
+登录地址：https://www.modelscope.cn/
+pip install modelscope (host1服务器上执行)
+mkdir -p Qwen2.5-14B-Instruct(路径名称可以自行指定)
+modelscope download –model Qwen/Qwen2.5-14B-Instruct  –local_dir ./Qwen2.5-14B-Instruct</p>
+<pre><code class="language-bash">nohup modelscope download --model Qwen/Qwen2.5-14B-Instruct  --local_dir ./Qwen2.5-14B-Instruct &gt; modelscope_dow.log 2&gt;&amp;1 &amp;
+</code></pre>
+<h5 id="222-打包vllm环境"><a class="header" href="#222-打包vllm环境">2.2.2 打包vllm环境</a></h5>
+<p><strong>在host1上执行</strong></p>
+<pre><code class="language-bash">conda activate vllm
+ #方法1：使用conda-pack（推荐）
+ #先安装conda-pack
+conda install conda-pack -y
+conda pack -n vllm -o vllm_env.tar.gz
+## conda pack -n reward3 -o reward3_env.tar.gz
+  #传输到host2/host3
+scp vllm_env.tar.gz ubuntu@10.60.43.107:/tmp/
+</code></pre>
+<p><strong>host2解压环境</strong>
+在host2上执行</p>
+<pre><code class="language-bash">#在host2上执行
+#创建环境目录
+mkdir -p ~/miniconda3/envs/vllm
+
+ #解压环境
+cd ~/miniconda3/envs/vllm
+tar -xzf /tmp/vllm_env.tar.gz
+
+#激活环境
+source ~/miniconda3/envs/vllm/bin/activate
+#修复路径
+conda-unpack
+ #测试环境
+python -c "import torch, deepspeed, transformers; print('Environment OK')"
+
+python -c "
+import torch, deepspeed, transformers
+print(f'PyTorch: {torch.__version__}')
+print(f'DeepSpeed: {deepspeed.__version__}')
+print(f'Transformers: {transformers.__version__}')
+print(f'CUDA Available: {torch.cuda.is_available()}')
+print(f'GPU Count: {torch.cuda.device_count()}')
+"
+同步完成
+</code></pre>
+<p><strong>host3同步环境</strong>
+scp vllm_env.tar.gz ubuntu@10.60.32.65:/tmp/</p>
+<pre><code class="language-bash">#在host3上执行
+#创建环境目录
+mkdir -p ~/miniconda3/envs/vllm
+
+ #解压环境
+cd ~/miniconda3/envs/vllm
+tar -xzf /tmp/vllm_env.tar.gz
+
+#激活环境
+source ~/miniconda3/envs/vllm/bin/activate
+#修复路径
+conda-unpack
+ #测试环境
+python -c "import torch, deepspeed, transformers; print('Environment OK')"
+
+python -c "
+import torch, deepspeed, transformers
+print(f'PyTorch: {torch.__version__}')
+print(f'DeepSpeed: {deepspeed.__version__}')
+print(f'Transformers: {transformers.__version__}')
+print(f'CUDA Available: {torch.cuda.is_available()}')
+print(f'GPU Count: {torch.cuda.device_count()}')
+"
+同步完成
+</code></pre>
+<h4 id="23-创建共享目录"><a class="header" href="#23-创建共享目录">2.3 创建共享目录</a></h4>
+<h5 id="231-host1构建目录"><a class="header" href="#231-host1构建目录">2.3.1 host1构建目录</a></h5>
+<p>在host1上执行</p>
+<pre><code class="language-bash">#在host1上执行 当前使用host0 为主节点
+sudo apt update
+sudo apt install nfs-kernel-server -y
+</code></pre>
+<pre><code class="language-bash">#创建共享目录
+sudo mkdir -p /shared/
+#设置权限
+sudo chown -R ubuntu:ubuntu /shared/
+chmod -R 755 /shared/
+</code></pre>
+<p>把模型文件放入到共享目录中
+scp -r Qwen2.5-14B-Instruct /shared/</p>
+<pre><code class="language-bash">#配置NFS导出（使用内网网段）
+sudo tee /etc/exports &lt;&lt; EOF
+/shared 10.60.0.0/16(rw,sync,no_subtree_check,no_root_squash,insecure)
+EOF
+#启动NFS服务
+sudo systemctl enable nfs-kernel-server
+sudo systemctl start nfs-kernel-server
+sudo exportfs -ra
+ #验证NFS配置
+sudo exportfs -v
+showmount -e localhost
+</code></pre>
+<h5 id="232-host2挂载目录"><a class="header" href="#232-host2挂载目录">2.3.2 host2挂载目录</a></h5>
+<p>切换到host2</p>
+<pre><code class="language-bash"> #SSH到host2
+ssh ubuntu@10.60.43.107
+#安装NFS客户端
+sudo apt update
+sudo apt install nfs-common -y
+</code></pre>
+<pre><code class="language-bash">#创建挂载点
+sudo mkdir -p /shared
+#测试挂载 10.60.197.243 是主节点的地址
+sudo mount -t nfs 10.60.197.243:/shared /shared
+ #验证挂载
+ls -la /shared/
+df -h | grep shared 
+</code></pre>
+<pre><code class="language-bash">#设置开机自动挂载
+echo "10.60.11.131:/shared /shared nfs defaults,_netdev 0 0" | sudo tee -a /etc/fstab
+</code></pre>
+<h5 id="233-host3挂载目录"><a class="header" href="#233-host3挂载目录">2.3.3 host3挂载目录</a></h5>
+<p>切换到host3 ,做同样的操作</p>
+<pre><code class="language-bash">#安装NFS客户端
+sudo apt update
+sudo apt install nfs-common -y
+
+#创建挂载点
+sudo mkdir -p /shared
+#测试挂载 10.60.197.243 是主节点的地址
+sudo mount -t nfs 10.60.197.243:/shared /shared
+ #验证挂载
+ls -la /shared/
+df -h | grep shared 
+</code></pre>
+<pre><code class="language-bash">#设置开机自动挂载
+echo "10.60.11.131:/shared /shared nfs defaults,_netdev 0 0" | sudo tee -a /etc/fstab
+</code></pre>
+<h4 id="24-安装pdsh"><a class="header" href="#24-安装pdsh">2.4 安装pdsh</a></h4>
+<h5 id="241-pdsh工具安装"><a class="header" href="#241-pdsh工具安装">2.4.1 pdsh工具安装</a></h5>
+<p>pdsh（Parallel Distributed Shell）是一个强大的并行分布式Shell工具，主要用于在多个主机上并行执行命令。让我详细介绍它的作用和使用方法。</p>
+<p>在host1上执行</p>
+<pre><code class="language-bash">#在host1上执行  只是为了在单节点方便控制其他服务器
+sudo apt install pdsh -y
+</code></pre>
+<pre><code class="language-bash">#创建PDSH配置目录
+mkdir -p ~/.pdsh
+
+ #创建机器列表
+cat &gt; ~/.pdsh/machines &lt;&lt; EOF
+
+# 训练集群节点
+10.60.197.243   # host1 - 主节点
+10.60.43.107  # host2 - 从节点
+10.60.32.65  # host3 - 从节点
+EOF
+
+#创建组配置
+cat &gt; ~/.pdsh/groups &lt;&lt; EOF
+all: 10.60.197.243,10.60.43.107,10.60.32.65
+workers: 10.60.43.107,10.60.32.65
+master: 10.60.197.243
+EOF
+</code></pre>
+<pre><code class="language-bash"># 添加自己的主机密钥到known_hosts 个人主机IP
+ssh-keyscan -H 10.60.197.243 &gt;&gt; ~/.ssh/known_hosts
+ssh-keyscan -H $(hostname) &gt;&gt; ~/.ssh/known_hosts
+</code></pre>
+<pre><code class="language-bash"># host1
+echo 'export PDSH_RCMD_TYPE=ssh' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<pre><code class="language-bash"># host1
+cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+</code></pre>
+<h5 id="242-pdsh工具测试"><a class="header" href="#242-pdsh工具测试">2.4.2 pdsh工具测试</a></h5>
+<pre><code class="language-bash">#测试PDSH连接
+pdsh -w 10.60.197.243,10.60.43.107,10.60.32.65 "nvidia-smi --query-gpu=count --format=csv,noheader,nounits"
+pdsh -w 10.60.197.243,10.60.43.107,10.60.32.65 'echo "$(hostname): $(whoami) - $(date)"'
+pdsh -w 10.60.197.243,10.60.43.107,10.60.32.65 "hostname"
+pdsh -w 10.60.197.243,10.60.43.107,10.60.32.65 'echo "PDSH test from $(hostname)"'
+</code></pre>
+<p>安装工具  ufw
+pdsh -w 10.60.197.243,10.60.43.107,10.60.32.65 “sudo apt install ufw -y”</p>
+<pre><code class="language-bash">#安装完成后配置防火墙 当前只是防火墙配置 也可以不使用pdsh单独执行
+pdsh -w 10.60.197.243,10.60.43.107,10.60.32.65 "
+    echo '=== \$(hostname) 配置防火墙 ===' &amp;&amp; \
+    sudo ufw --force enable &amp;&amp; \
+    sudo ufw allow 22 &amp;&amp; \
+    sudo ufw allow 29500 &amp;&amp; \
+    sudo ufw allow 29501 &amp;&amp; \·
+    sudo ufw allow 2049 &amp;&amp; \
+    sudo ufw allow from 10.60.0.0/16 &amp;&amp; \
+    sudo ufw status numbered
+"
+</code></pre>
+<pre><code class="language-bash"># 所有节点都需要
+sudo apt update
+sudo apt install -y ninja-build
+</code></pre>
+<h4 id="25-设置hosts地址"><a class="header" href="#25-设置hosts地址">2.5 设置hosts地址</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th style="text-align: left">节点</th><th style="text-align: left">命令</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: left">1. 先查内网地址</td><td style="text-align: left"><code>ip route get 1 | awk '{print $7; exit}'  # 假设输出 10.60.197.243（另一台就是 10.60.43.107）</code></td></tr>
+<tr><td style="text-align: left">2. 备份原文件</td><td style="text-align: left"><code>sudo cp /etc/hosts /etc/hosts.bak</code></td></tr>
+<tr><td style="text-align: left">3. 删掉 127.0.1.1 行（关键）</td><td style="text-align: left"><code>sudo sed -i '/^127\.0\.1\.1/d' /etc/hosts</code></td></tr>
+<tr><td style="text-align: left">4. 把本机主机名绑定到内网 IP</td><td style="text-align: left"><code># 把下面三条里的 HOSTNAME 换成真实主机名，IP 换成本机内网地址 HOSTNAME=$(hostname) IP=$(ip route get 1 | awk '{print $7}') echo "$IP $HOSTNAME" | sudo tee -a /etc/hosts</code></td></tr>
+<tr><td style="text-align: left">5. 验证</td><td style="text-align: left"><code>python3 -c "import socket; print(socket.gethostbyname(socket.gethostname()))" # 应该输出 10.60.x.x，而**不是** 127.0.1.1</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="三-大模型分布式推理"><a class="header" href="#三-大模型分布式推理">三 大模型分布式推理</a></h3>
+<h4 id="31--启动ray集群"><a class="header" href="#31--启动ray集群">3.1  启动Ray集群</a></h4>
+<h5 id="host1上执行"><a class="header" href="#host1上执行">host1上执行</a></h5>
+<pre><code class="language-bash">#在host1(10.60.197.243) 上执行
+#启动Ray头节点
+ray start --head --port=6379 --dashboard-host=0.0.0.0 --dashboard-port=8265 --num-gpus=1
+#记录输出的连接信息，类似：
+#ray start --address='10.60.197.243:6379'
+</code></pre>
+<h5 id="host2上执行"><a class="header" href="#host2上执行">host2上执行</a></h5>
+<pre><code class="language-bash">#在host2 (10.60.43.107) 上执行
+#使用host0输出的连接命令
+ray start --address='10.60.197.243:6379' --node-ip-address='10.60.43.107' --num-gpus=1
+</code></pre>
+<h5 id="host3上执行"><a class="header" href="#host3上执行">host3上执行</a></h5>
+<pre><code class="language-bash">#在host3 (10.60.32.65) 上执行
+#使用host0输出的连接命令
+ray start --address='10.60.197.243:6379' --node-ip-address='10.60.32.65' --num-gpus=1
+</code></pre>
+<h5 id="host4上执行"><a class="header" href="#host4上执行">host4上执行</a></h5>
+<pre><code class="language-bash">#在host1上执行
+ray status
+</code></pre>
+<h5 id="3台服务器都打开"><a class="header" href="#3台服务器都打开">3台服务器都打开</a></h5>
+<pre><code class="language-bash">#在3台机器上都执行，开放PyTorch分布式通信端口
+sudo ufw allow 29500:29510/tcp
+sudo ufw allow 6379/tcp    # Ray端口
+sudo ufw allow 8265/tcp    # Ray Dashboard端口
+</code></pre>
+<h4 id="32-启动模型并测试"><a class="header" href="#32-启动模型并测试">3.2 启动模型并测试</a></h4>
+<p>我们三台服务器，每台服务器有1个24G的GPU，我现在要启动模型Qwen2.5-14B-Instruct，这个模型的大小是28G，有40头的注意力，下面的启动脚本的参数我应该如何设置？</p>
+<p><strong>模型启动</strong></p>
+<pre><code class="language-bash"># 设置环境变量
+export NCCL_DEBUG=INFO
+export NCCL_IB_DISABLE=1
+export NCCL_P2P_DISABLE=1
+export GLOO_SOCKET_IFNAME=eth0
+export NCCL_SOCKET_IFNAME=eth0
+
+python -m vllm.entrypoints.openai.api_server \
+  --model /shared/Qwen2.5-14B-Instruct \
+  --host 0.0.0.0 \
+  --port 8000 \
+  --dtype bfloat16 \
+  --tensor-parallel-size 2 \
+  --pipeline-parallel-size 1 \
+  --max-model-len 2048 \
+  --gpu-memory-utilization 0.85 \
+  --distributed-executor-backend ray \
+  --api-key financial-reward-model-key
+</code></pre>
+<pre><code class="language-bash">## vLLM命令参数详解
+
+### 模型和服务参数
+--model: 指定要加载的模型路径
+--host 0.0.0.0: 允许所有IP访问（不限制来源）
+--port 8000: API服务监听的端口号
+--api-key: API访问的安全密钥
+
+### 模型配置参数
+--dtype bfloat16: 使用半精度浮点数，节省显存，略微降低精度
+--max-model-len 2048: 模型处理的最大序列长度
+--gpu-memory-utilization 0.85: 使用85%的GPU显存，留15%作为缓冲
+
+### 并行配置参数
+--tensor-parallel-size 2: 张量并行度
+--pipeline-parallel-size 3: 流水线并行度
+--distributed-executor-backend ray: 使用Ray作为分布式执行后端
+
+### 性能优化参数
+--disable-log-requests: 关闭请求日志，减少IO开销
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="image/1-4.PNG" alt="主机规划"><span class="img-wrapper"><img src="image/1-4.PNG" alt="主机规划"></span></label></p>
+<p><strong>模型测试</strong></p>
+<pre><code class="language-bash">curl -s http://10.60.197.243:8000/v1/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer financial-reward-model-key" \
+  -d '{
+    "model": "/shared/Qwen2.5-14B-Instruct",
+    "prompt": "你好，请简单介绍一下你自己：",
+    "max_tokens": 50,
+    "temperature": 0.3
+  }' | jq .
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="image/1-6.PNG" alt="主机规划"><span class="img-wrapper"><img src="image/1-6.PNG" alt="主机规划"></span></label></p>
+<h2 id="2-分布式微调环境构建"><a class="header" href="#2-分布式微调环境构建">2. 分布式微调环境构建</a></h2>
+<h3 id="-微调环境构建"><a class="header" href="#-微调环境构建">— 微调环境构建</a></h3>
+<pre><code class="language-bash"># Skywork/Skywork-Reward-V2-Llama-3.image/1-8B版本环境
+conda create -n reward2 python=3.11 -y
+pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1  -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install accelerate==0.29.3 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install transformers==4.51.3 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install deepspeed==0.15.4 -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install datasets==2.14.0 -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+</code></pre>
+<p>安装完了以后，有版本冲突，所以继续安装两个依赖</p>
+<pre><code class="language-bash">pip install pyarrow==14.0.2 --force-reinstall -i https://pypi.tuna.tsinghua.edu.cn/simple
+pip install "numpy&lt;2" --force-reinstall -i https://pypi.tuna.tsinghua.edu.cn/simple/
+</code></pre>
+<p>接下来把conda环境同步给其它服务器（参考之前打包vllm的步骤）</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
