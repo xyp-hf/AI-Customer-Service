@@ -1,0 +1,2072 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>智能客服之代码落地 - 人工智能AI客服</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-475bd3fa.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-b23067ab.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">人工智能AI客服</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h2 id="数据库表设计"><a class="header" href="#数据库表设计">数据库表设计</a></h2>
+<ul>
+<li>SQLalChermy官网：https://www.sqlalchemy.org/</li>
+<li>SQLAlchemy 是 Python 生态里最流行的 SQL 工具包和对象关系映射（ORM）库‌</li>
+<li>它让你用 Python 代码操作数据库，不用直接写 SQL，同时保留了对底层 SQL 的灵活控制。‌‌</li>
+</ul>
+<h3 id="建表"><a class="header" href="#建表">建表</a></h3>
+<ul>
+<li>用户表</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>类型</th><th>约束</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td>id</td><td>Integer</td><td>PRIMARY KEY</td><td>用户唯一标识</td></tr>
+<tr><td>username</td><td>String(50)</td><td>UNIQUE, NOT NULL</td><td>用户名</td></tr>
+<tr><td>email</td><td>String(100)</td><td>UNIQUE, NOT NULL</td><td>电子邮件</td></tr>
+<tr><td>password_hash</td><td>String(255)</td><td>NOT NULL</td><td>密码哈希值</td></tr>
+<tr><td>created_at</td><td>DateTime</td><td>DEFAULT NOW()</td><td>创建时间</td></tr>
+<tr><td>updated_at</td><td>DateTime</td><td>DEFAULT NOW()</td><td>更新时间</td></tr>
+<tr><td>last_login</td><td>DateTime</td><td>NULL</td><td>最后登录时间</td></tr>
+<tr><td>status</td><td>String(20)</td><td>DEFAULT ‘active’</td><td>用户状态</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>对话表</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>类型</th><th>约束</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td>id</td><td>Integer</td><td>PRIMARY KEY</td><td>对话唯一标识</td></tr>
+<tr><td>user_id</td><td>Integer</td><td>FOREIGN KEY</td><td>关联用户ID</td></tr>
+<tr><td>created_at</td><td>DateTime</td><td>DEFAULT NOW()</td><td>创建时间</td></tr>
+<tr><td>updated_at</td><td>DateTime</td><td>DEFAULT NOW()</td><td>更新时间</td></tr>
+<tr><td>status</td><td>String(20)</td><td>DEFAULT ‘ongoing’</td><td>对话状态</td></tr>
+<tr><td>dialogue_type</td><td>Enum</td><td>NOT NULL</td><td>对话类型</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>消息表</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>类型</th><th>约束</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td>id</td><td>Integer</td><td>PRIMARY KEY</td><td>消息唯一标识</td></tr>
+<tr><td>conversation_id</td><td>Integer</td><td>FOREIGN KEY</td><td>关联对话ID</td></tr>
+<tr><td>sender</td><td>String(50)</td><td>NOT NULL</td><td>发送者</td></tr>
+<tr><td>content</td><td>Text</td><td>NOT NULL</td><td>消息内容</td></tr>
+<tr><td>created_at</td><td>DateTime</td><td>DEFAULT NOW()</td><td>创建时间</td></tr>
+<tr><td>message_type</td><td>String(20)</td><td>DEFAULT ‘text’</td><td>消息类型</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="用户登录模块"><a class="header" href="#用户登录模块">用户登录模块</a></h3>
+<pre><code class="language-bash">## 用户注册逻辑
+@router.post("/register", response_model=UserResponse)
+# Depends(get_db) 表示 db 参数是一个依赖项，它会调用 get_db 函数来获取一个数据库会话（AsyncSession）。
+# FastAPI 会在处理请求时自动执行 get_db 函数，并将返回的结果传递给 register 函数的 db 参数。
+async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)): 
+    try:
+        user_service = UserService(db)
+        user = await user_service.create_user(user_data)
+        return user
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+## 用户登录逻辑
+@router.post("/token", response_model=Token)
+async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
+    user_service = UserService(db)
+    user = await user_service.authenticate_user(user_data.email, user_data.password)
+    if not user:
+        raise HTTPException(
+            status_code=401,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token = create_access_token(
+        data={"sub": user.email}, expires_delta=access_token_expires
+    )
+    return {"access_token": access_token, "token_type": "bearer"}
+## 登录以后，显示用户信息
+@router.get("/users/me", response_model=UserResponse)
+async def get_current_user_info(current_user: User = Depends(get_current_user)):
+    """获取当前登录用户的信息"""
+    return current_user 
+</code></pre>
+<h3 id="代码实现之对话模块设计"><a class="header" href="#代码实现之对话模块设计">代码实现之对话模块设计</a></h3>
+<h3 id="代码实现之联网模块设计"><a class="header" href="#代码实现之联网模块设计">代码实现之联网模块设计</a></h3>
+<pre><code class="language-bash">"""搜索服务的提示词管理"""
+from datetime import datetime
+
+# 基础系统提示
+SEARCH_SYSTEM_PROMPT = """你是一个智能助手，可以通过调用外部的工具获取实时信息。
+你可以使用的工具及使用方法如下：
+
+{tools_description}  
+
+当你遇到以下情况时，请调用联网检索工具：
+1. 问题涉及实时数据（如天气、新闻、股票）。
+2. 问题涉及最新事件或动态信息（如'今天发生了什么？'）。
+3. 问题涉及特定领域的外部知识（如法律、医疗、科技）。
+4. 问题中包含'最新'、'当前'、'今天'等时间敏感关键词。
+其他情况下，请直接回答用户的问题。"""
+
+# 搜索结果总结提示
+SEARCH_SUMMARY_PROMPT = """# 以下内容是基于用户发送的消息的搜索结果:
+
+{context}
+
+每个搜索结果包含标题、链接和内容。在引用来源时，请使用以下固定格式：
+- 引用格式：[标题](链接)
+- 示例：根据最新研究显示，人工智能正在快速发展 [2024年AI发展报告](http://example.com)
+- 引用必须放在相关内容的末尾，不要集中在最后
+- 如果一段内容来自多个来源，请在末尾列出所有来源，用空格分隔，如：[标题1](链接1) [标题2](链接2)
+
+在回答时，请注意以下几点：
+
+今天是{cur_date}。
+1. 并非搜索结果的所有内容都与用户的问题密切相关，你需要结合问题，对搜索结果进行甄别、筛选。
+2. 对于列举类的问题，尽量将答案控制在10个要点以内，并告诉用户可以查看搜索来源、获得完整信息。
+3. 对于创作类的问题，请务必在每个段落末尾使用规定格式引用来源。
+4. 如果回答很长，请尽量结构化、分段落总结。如果需要分点作答，尽量控制在5个点以内。
+5. 对于客观类的问答，如果答案非常简短，可以适当补充相关信息。
+6. 你需要根据用户要求和回答内容选择合适、美观的回答格式，确保可读性强。
+7. 你的回答应该综合多个相关网页来回答，不要重复引用同一个来源。
+
+用户问题：{query}"""
+</code></pre>
+<h2 id="企业级智能客服版本2"><a class="header" href="#企业级智能客服版本2">企业级智能客服版本2</a></h2>
+<h3 id="企业智能客服整体架构设计"><a class="header" href="#企业智能客服整体架构设计">企业智能客服整体架构设计</a></h3>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-1.png" alt="企业智能客服整体架构设计"><span class="img-wrapper"><img src="./image/6/6-1.png" alt="企业智能客服整体架构设计"></span></label></p>
+<h3 id="企业智能客服数据架构方案"><a class="header" href="#企业智能客服数据架构方案">企业智能客服数据架构方案</a></h3>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-2.png" alt="企业智能客服数据架构方案"><span class="img-wrapper"><img src="./image/6/6-2.png" alt="企业智能客服数据架构方案"></span></label></p>
+<h2 id="企业智能客服csv数据方案设计与落地"><a class="header" href="#企业智能客服csv数据方案设计与落地">企业智能客服CSV数据方案设计与落地</a></h2>
+<h3 id="电商客服数据准备"><a class="header" href="#电商客服数据准备">电商客服数据准备</a></h3>
+<p>智能客服场景使用的数据往往是企业内部非常私密的数据，是不太可能在公网上获取到相关的隐私数据的。因此，我们接下来给大家选择的数据集是来自Kaggle上的一个公开数据集 - Northwind Traders。其地址为：<a href="https://www.kaggle.com/datasets/jeetahirwar/northwind-traders">https://www.kaggle.com/datasets/jeetahirwar/northwind-traders</a></p>
+<p>该数据集包含了一个小型商业公司的各种业务数据，如产品、订单、客户、员工等信息。它是一个关系型数据库的经典示例，包含了多个相互关联的表格。以下是 Northwind Traders 数据库中通常包含的一些主要表格及其字段说明：</p>
+<ul>
+<li>Customers (客户表)</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名称</th><th>数据类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>CustomerID</td><td>nchar(5)</td><td>客户ID (主键)</td></tr>
+<tr><td>CompanyName</td><td>nvarchar(40)</td><td>公司名称</td></tr>
+<tr><td>ContactName</td><td>nvarchar(30)</td><td>联系人姓名</td></tr>
+<tr><td>ContactTitle</td><td>nvarchar(30)</td><td>联系人职务</td></tr>
+<tr><td>Address</td><td>nvarchar(60)</td><td>地址</td></tr>
+<tr><td>City</td><td>nvarchar(15)</td><td>城市</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Employees (员工表)</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名称</th><th>数据类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>EmployeeID</td><td>int</td><td>员工ID (主键)</td></tr>
+<tr><td>employeeName</td><td>nvarchar(20)</td><td>员工名字</td></tr>
+<tr><td>Title</td><td>nvarchar(30)</td><td>职位</td></tr>
+<tr><td>City</td><td>nvarchar(15)</td><td>城市</td></tr>
+<tr><td>Country</td><td>nvarchar(15)</td><td>国家</td></tr>
+<tr><td>ReportsTo</td><td>int</td><td>上级ID (外键)</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Products (产品表)</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名称</th><th>数据类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>ProductID</td><td>int</td><td>产品ID (主键)</td></tr>
+<tr><td>ProductName</td><td>nvarchar(40)</td><td>产品名称</td></tr>
+<tr><td>CategoryID</td><td>int</td><td>类别ID (外键)</td></tr>
+<tr><td>QuantityPerUnit</td><td>nvarchar(20)</td><td>单位数量</td></tr>
+<tr><td>UnitPrice</td><td>money</td><td>单价</td></tr>
+<tr><td>Discontinued</td><td>bit</td><td>是否停产</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Categories (分类表)</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名称</th><th>数据类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>CategoryID</td><td>int</td><td>类别ID (主键)</td></tr>
+<tr><td>CategoryName</td><td>nvarchar(15)</td><td>类别名称</td></tr>
+<tr><td>Description</td><td>ntext</td><td>类别描述</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Shippers (货运公司表)</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名称</th><th>数据类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>ShipperID</td><td>int</td><td>货运公司ID (主键)</td></tr>
+<tr><td>CompanyName</td><td>nvarchar(40)</td><td>公司名称</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Orders (订单表)</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名称</th><th>数据类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>OrderID</td><td>int</td><td>订单ID (主键)</td></tr>
+<tr><td>CustomerID</td><td>nchar(5)</td><td>客户ID (外键)</td></tr>
+<tr><td>EmployeeID</td><td>int</td><td>员工ID (外键)</td></tr>
+<tr><td>OrderDate</td><td>datetime</td><td>订单日期</td></tr>
+<tr><td>RequiredDate</td><td>datetime</td><td>要求交货日期</td></tr>
+<tr><td>ShippedDate</td><td>datetime</td><td>实际发货日期</td></tr>
+<tr><td>ShippedID</td><td>int</td><td>运输方式ID (外键)</td></tr>
+<tr><td>Freight</td><td>money</td><td>运费</td></tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Order Details (订单详情表)</li>
+</ul>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名称</th><th>数据类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>OrderID</td><td>int</td><td>订单ID (主键部分/外键)</td></tr>
+<tr><td>ProductID</td><td>int</td><td>产品ID (主键部分/外键)</td></tr>
+<tr><td>UnitPrice</td><td>money</td><td>单价</td></tr>
+<tr><td>Quantity</td><td>smallint</td><td>数量</td></tr>
+<tr><td>Discount</td><td>real</td><td>折扣</td></tr>
+</tbody>
+</table>
+</div>
+<p>以上是Northwind Traders 数据库中主要表格的关联关系，大家可以直接在其地址为：<a href="https://www.kaggle.com/datasets/jeetahirwar/northwind-traders">https://www.kaggle.com/datasets/jeetahirwar/northwind-traders</a> 下载到本地。不过，我们这里仿照该数据集，通过脚本生成了类似结构的符合电商领域客服场景的数据集，构建脚本存储位置在：create_sql_data.py，大家可以直接运行该脚本，生成符合我们需求的数据集。</p>
+<p>生成数据步骤：</p>
+<ol>
+<li>
+<p>到MySQL数据库中提前创建好数据库：</p>
+<p>create database graphrag</p>
+</li>
+<li>
+<p>下载数据集：</p>
+</li>
+</ol>
+<p>https://www.kaggle.com/datasets/jeetahirwar/northwind-traders 下载到本地</p>
+<ol start="3">
+<li>
+<p>执行脚本：</p>
+<p>python create_sql_data.py</p>
+</li>
+</ol>
+<p>执行前需要安装如下依赖：</p>
+<p>pip install pymysql pandas numpy faker sqlalchemy</p>
+<ol start="4">
+<li>
+<p>观察MySQL库中的数据表：
+<label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-3.png" alt="MySQL库中的数据表"><span class="img-wrapper"><img src="./image/6/6-3.png" alt="MySQL库中的数据表"></span></label></p>
+</li>
+<li>
+<p>观察csv文件
+在graphrag\origin_data\exported_data 目录下，还可以看到生成的一系列数据表的.csv 文件</p>
+</li>
+</ol>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-4.png" alt="MySQL库中的数据表"><span class="img-wrapper"><img src="./image/6/6-4.png" alt="MySQL库中的数据表"></span></label></p>
+<p>这些就是我们接下来要操作的数据</p>
+<h3 id="数据处理方案分析"><a class="header" href="#数据处理方案分析">数据处理方案分析</a></h3>
+<ol>
+<li>对于非自然语言的结构化数据，直接定义明确的规范构建知识图谱，导入到如Neo4j 中进行统一管理。比如以客服场景为例，能从结构化数据中梳理出来的明确节点和边如下所示：</li>
+</ol>
+<pre><code class="language-bash">    - 节点类型
+        - Product - 产品节点
+        - Supplier - 供应商节点
+        - Customer - 客户节点
+        - Employee - 员工节点
+        - Shipper - 物流公司节点
+        - Order - 订单节点
+    - 边类型
+        - SUPPLIED_BY - 产品由供应商提供
+        - PLACED_BY - 订单由客户下单
+        - PROCESSED_BY - 订单由员工处理
+        - SHIPPED_VIA - 订单通过物流公司配送
+        - CONTAINS - 订单包含产品
+        - REPORTS_TO - 员工上下级关系
+</code></pre>
+<ol start="2">
+<li>对于自然语言的非结构化数据，根据场景的特定信息做文本聚合。比如如果想要提取一些商品的评论信息，可以按照商品的名称进行聚合，然后对聚合后的内容进行实体和关系的提取。比如：</li>
+</ol>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-6.png" alt="文本聚合"><span class="img-wrapper"><img src="./image/6/6-6.png" alt="文本聚合"></span></label></p>
+<p>聚合后的格式为：</p>
+<pre><code class="language-bash">    "客户 {CustomerName} 对 {C
+    ategoryName} 产品 {ProductName} 的评价 (评分: {Rating} 星): \"{Text}\" (评价日期: {ReviewDate})"
+</code></pre>
+<p>后者就是典型的Microsof GraphRAG比较适合的解析领域，而在前面的课程中，我们已经介绍过如何把Microsof GraphRAG生成的一系列parquet 文件导入到Neo4j 中，所以混合检索的策略也非常多，主要有如下几种：</p>
+<ol>
+<li>将直接构建的Neo4j 知识图谱与Microsof GraphRAG 构建出来的图谱进行合并，用统一的检索流程进行问答检索；</li>
+<li>分离直接可以构建的Neo4j 知识图谱和Microsof GraphRAG 构建出来的图谱，用不同的检索流程进行问答检索；</li>
+</ol>
+<ul>
+<li>直接可以构建的Neo4j 知识图谱，使用 TEXT2CYPHER 的流程进行问答检索；</li>
+<li>Microsof GraphRAG 构建出来的图谱，使用 Global Search 或者 Local Search 的流程进行问答检索；</li>
+</ul>
+<p>实测效果比较好的是第二种策略，其一是可以按照业务场景分离数据库，各自建立对应的检索优化流程；其二在知识库的后期维护中，可以按照业务场景分离数据库，隔离数据。同时，借助Agent技术做好第一轮的意图识别，根据用户需求选择对应的数据库进行针对性的检索，也可以有效降低检索的响应时长。</p>
+<h3 id="自然语言数据处理"><a class="header" href="#自然语言数据处理">自然语言数据处理</a></h3>
+<h4 id="csv文件数据预处理"><a class="header" href="#csv文件数据预处理">CSV文件数据预处理</a></h4>
+<p>我们需要根据自己的业务需求，在偌大的业务数据中构建出较为完整的语义文本。以智能客服场景为例，我们可以抽象出如下几种业务需求通常是以自然语言存储的：</p>
+<ol>
+<li>客户评论与反馈数据：</li>
+</ol>
+<pre><code class="language-bash">    review_id,product_id,customer_id,rating,review_text,date
+    101,P234,C567,4,"这款智能音箱音质非常好，但连接蓝牙设备时偶尔会断开。语音助手理解能力还需提高。",2023-05-12
+</code></pre>
+<p>   其业务价值是从评论文本中提取产品特性、问题点和情感, 构建产品-特性-问题的知识网络, 帮助客服快速了解产品常见问题。</p>
+<ol start="2">
+<li>客服聊天记录</li>
+</ol>
+<pre><code class="language-bash">    conversation_id,timestamp,sender_type,message,intent,order_id
+    CS1001,2023-06-15 14:23:45,customer,"我上周五买的小米智能灯泡无法连接到我的华为手机，我已经按照说明书重置了三次",product_issue,ORD8976
+</code></pre>
+<p>  其业务价值是提取产品问题、解决方案和兼容性信息，构建问题-故障-解决方案的知识图谱，训练客服系统自动回答类似问题。</p>
+<ol start="3">
+<li>退货和投诉记录</li>
+</ol>
+<pre><code class="language-bash">    case_id,order_id,product_id,return_reason,customer_description,resolution
+    RET345,ORD7891,P456,"产品损坏","收到的智能插座有明显的外壳裂痕，插入电源后指示灯闪烁红色，无法正常工作","退款并更换新品"
+</code></pre>
+<p>  其业务价值是提取产品问题模式和解决方案， 构建产品-问题类型-解决方案关系。帮助客服系统自动处理退货和投诉。</p>
+<p>原始数据：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-7.png" alt="原始数据"><span class="img-wrapper"><img src="./image/6/6-7.png" alt="原始数据"></span></label></p>
+<pre><code class="language-bash">处理后的 text 字段中的内容：
+
+    客户ID: MH412
+    客户公司: 创联世纪传媒有限公司智能科技
+    客户所在地: 文市, 中国
+    产品信息: 索尼 智能体重秤 Basic (类别: 智能体重秤)
+    生产商: 索尼智能科技
+    产品价格: 2042.82
+    评分: 4.9星
+    评价日期: 2024年06月12日
+    评价内容: "这款智能体重秤质量很好，反应灵敏。总体来说很满意。
+</code></pre>
+<p>构建完整的text语义信息是第一步，接下来结合Microsof GraphRAG 的Workflow 流程，我们还需要进行策略上的优化，具体来说：就是把单条语义信息合并成更大的文本块，从而能在构建索引的单次处理中，尽可能的包含更多的信息，降低构建成本的同时，大幅提升索引构建的效率。在执行这一步的时候，需要考虑的是尽可能的把语义相近的文本块合并在一起，因此相关的策略可参考如下：</p>
+<ol>
+<li><strong>分组</strong>：通过groupby 分组，例如，所有属于“电子产品”的评论、产品或数据可以被分在一起。这种分组有助于在分析时保持上下文的一致性。</li>
+<li><strong>设置最大Token</strong>：在每个类别内，根据token数量动态决定每批次包含的评论数量，避免某些未知的评论过长，超出最大上下文限制，同时太长的文本框会在读取时导致OOM 错误。</li>
+<li><strong>设置分隔符</strong>：在合并多行时，通过特殊字符如&lt;ROW_SEP&gt;来标记单独行之间的边界，用于在Microsof GraphRAG 的text_unit 切分中，能够正确识别出单独的行，制定单独的切分策略。</li>
+</ol>
+<p>进行处理的脚本：preprocess_data.py, 最终生成的文件为merged_reviews.csv</p>
+<p>我们看一下里面的内容：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-8.png" alt="原始数据"><span class="img-wrapper"><img src="./image/6/6-8.png" alt="原始数据"></span></label></p>
+<p>微软GraphRAG对.csv 文件中的每一行row(行)， 会看做一个Document，按照设置的size 和overlap 进行切分，所以这种切分方法是存在一定问题的，主要在于：为了增加索引效率，我们手动将多行合并成一个text，如果按照这种切分方法，极大概率会把某一行原始的text切分开，导致这一行的信息丢失，从而影响索引构建的效果，基于此，我们需要手动实现对.csv 文件的切分策略优化。</p>
+<h4 id="csv文件切割策略优化"><a class="header" href="#csv文件切割策略优化">CSV文件切割策略优化</a></h4>
+<p>接下来我们要看GraphRAG的源码，大家在听这个项目之前，需要学习《GraphRAG深度剖析》的课程，我这儿默认认为大家学习完了这个课，所以我这儿就直接基于GraphRAG的源码进行讲解了。</p>
+<p>结合Microsof GraphRAG 的内置流程和我们在前一阶段对.csv 文件的预处理，一种非常行之有效的切分优化策略如下：</p>
+<ol>
+<li>首先使用分隔符拆分文本，每个分隔后的部分作为一个完整的评论块处理；</li>
+<li>对于正常长度的评论块，按照 config.size 进行分组。假设一个text中有两个评论块，每个token数为20，而config.size设置为30，切分策略如下：</li>
+</ol>
+<ul>
+<li>首先检查第一个评论块：
+<ul>
+<li>当前chunk为空，所以直接添加第一个评论块（20 tokens）</li>
+<li>current_chunk_texts = [评论块1]</li>
+<li>current_chunk_size = 20</li>
+</ul>
+</li>
+<li>然后检查第二个评论块：
+<ul>
+<li>检查添加后是否会超过限制：current_chunk_size + row_tokens = 20 + 20 = 40</li>
+<li>因为40 &gt; 30（config.size），所以会先保存当前chunk</li>
+<li>创建一个包含第一个评论块的chunk并添加到结果中</li>
+<li>然后重置当 前chunk，并添加第二个评论块</li>
+<li>current_chunk_texts = [评论块2]</li>
+<li>current_chunk_size = 20</li>
+</ul>
+</li>
+<li>最后处理：
+<ul>
+<li>处理完所有评论块后，保存最后一个chunk（包含第二个评论块）</li>
+<li>所以最终结果是两个chunk，每个包含一个评论块。</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>当单个评论块超过config.size时，借助chunk_overlap 参数尽可能的保留完整的语义信息。</li>
+</ol>
+<p>述优化策略的实现代码已经集成到Microsof GraphRAG 源码中，存储位置为：graphrag\graphrag\index\operations\chunk_text\csv_strategy.py。 同时，如果要启用我们自定义的切分策略，仅需要修改settings.yaml 文件中chunks 下的 strategy 参数为csv 即可，如下所示：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-9.png" alt="策略优化"><span class="img-wrapper"><img src="./image/6/6-9.png" alt="策略优化"></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-10.png" alt="策略优化"><span class="img-wrapper"><img src="./image/6/6-10.png" alt="策略优化"></span></label></p>
+<p>至此，我们现在已经优化了.csv 格式文件的预处理和text_unit 的切分，接下来的Workflow 流程将是对每一个text_unit 进行实体和关系的提取。因此，我们要进一步优化的就是Prompt 模板，从而让大模型可以更加精准的提取出我们需要的实体和关系。</p>
+<p>执行源码，验证切割思路</p>
+<pre><code class="language-bash">conda create --name graph python=3.11
+conda activate graph
+pip install graphrag==2.1.0
+
+pip install poetry 
+pip install poethepoet
+## 在项目的根目录下执行
+poetry run poe index --root ./data
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-11.png" alt="策略优化"><span class="img-wrapper"><img src="./image/6/6-11.png" alt="策略优化"></span></label></p>
+<h4 id="动态提示词生成"><a class="header" href="#动态提示词生成">动态提示词生成</a></h4>
+<p>在Microsof GraphRAG 中，实体、关系、社区报告、摘要等信息的提取都是依赖Prompt 模板 + 大模型来生成的。其中，用于实体关系提取的Prompt 模版为extract_graph.txt，其内容如下所示：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-12.png" alt="动态提示词生成"><span class="img-wrapper"><img src="./image/6/6-12.png" alt="动态提示词生成"></span></label></p>
+<ul>
+<li>
+<p>同时，仅使用extract_graph.txt 模板其默认提取的实体和关系类型为：organization、person、geo、event。这个很明显是不太符合我们传入的智能客服场景的，因此，我们需要设计一个更加符合我们业务需求的Prompt 模板。</p>
+</li>
+<li>
+<p>Microsof GraphRAG 提供了两种方式来调整Prompt 模板，分别是手动调整和自动调整。其中：手动调整指的是通过以纯文本形式编写自定义提示文件来覆盖每个提示，但有一定的限制，即需要包含指定的关键词，稍有不慎就会导致Workflow 流程中断。另外一种方式是自动调整，即通过Microsof GraphRAG 内置实现的 Prompt 模板优化器来调整Prompt 模板，这种方式也是我们推荐的方式。
+我们接下来重点介绍启动调整的方式</p>
+</li>
+<li>
+<p>首先，Auto Prompt Tuning 的工作流入口函数仍然是在graphrag\graphrag\cli\main.py文件中的_prompt_tune_cli函数，位置如下所示：</p>
+</li>
+</ul>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-13.png" alt="调整Prompt 模板"><span class="img-wrapper"><img src="./image/6/6-13.png" alt="调整Prompt 模板"></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-14.png" alt="调整Prompt 模板"><span class="img-wrapper"><img src="./image/6/6-14.png" alt="调整Prompt 模板"></span></label></p>
+<p>接下来我们依然借助源码来详细介绍Auto Prompt Tuning 的实现流程，以及上述各个参数的实际应用价值。其中prompt tune 的源码核心函数位于：graphrag\graphrag\api\prompt_tune.py 文件中的generate_indexing_prompts函数，如下所示：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-15.png" alt="调整Prompt 模板"><span class="img-wrapper"><img src="./image/6/6-15.png" alt="调整Prompt 模板"></span></label></p>
+<p>其核心流程包含以下 11 个步骤：</p>
+<ol>
+<li>解析settings.yaml 中配置的参数， 通过 –config 参数；</li>
+<li>找到在 input 文件夹中存放的文档， 通过 –root 参数指定根目录；</li>
+<li>将读取到的文档切分成text_unit （块），通过 –chunk_size 参数指定切分策略中每个块的大小；</li>
+<li>限制用于后续生成提示的原始文档的数量，通过 –limit 参数指定；</li>
+<li>根据 –k 参数，进一步选择具体的text_unit 块，包含三个策略：</li>
+</ol>
+<ul>
+<li>如果 –selection-method 参数为 top，则选择前k个文本单元；</li>
+<li>如果 –selection-method 参数为 random，则随机选择k个文本单元；</li>
+<li>如果 –selection-method 参数为 auto，则使用k和n_subset_max选择文本单元，具体的实现逻辑是：
+<ul>
+<li>–n-subset-max 用来限制随机采样的取值，表示从text_unit个文本单元中随机采样n_subset_max个文本单元，转化成 Embedding 向量；</li>
+<li>计算采样文本单元的 Embedding 向量平均值，即中心点；</li>
+<li>计算每个采样文本块到中心点的距离，选择出k个距离中心点最近的文本单元；</li>
+<li>最终选择出来的文本最能代表整个文档集合的一般特征，同时可以过滤掉一些极端的文本块；</li>
+</ul>
+</li>
+</ul>
+<ol start="6">
+<li>设置输入数据所属的场景领域，比如电商客服、算法分析等，用于填充Prompt 模板中的domain 参数，如果未指定，则通过内置提示词 + 语言模型自动生成，最后填充 Prompt 模板中的domain 参数；</li>
+<li>设置最终输出的提示词模版的语言，通过–language 参数指定，如果未指定，则通过内置提示词 + 语言模型自动生成，最后填充 Prompt 模板中的language 参数；</li>
+<li>根据设置的领域domain，生成模型的系统身份背景信息；</li>
+<li>如果设置 –discover_entity-types， 则会通过提示词 + 语言模型自动发现符合当前输入数据的实体类型；</li>
+<li>生成用于生成实体配置的实体/关系示例列表，用来填充Prompt 模板中的examples 参数，即Few-shot 示例;</li>
+<li>最后，依次生成用于提取实体、关系、社区报告、摘要的提示词，可以通过 –min_examples-required 参数指定每个提示词需要的最小示例数量，以及通过–output 参数指定输出文件夹。</li>
+</ol>
+<p>通过以上的源码解读，我们则可以非常清楚的了解如何执行Auto Prompt Tuning 流程。因此在源码环境下，我们可以使用如下命令来执行Auto Prompt Tuning 流程：</p>
+<pre><code class="language-bash">    poetry run poe prompt_tune --config ./data/settings.yaml --root ./data --domain "智能客服"  --selection-method top --k 10 --output ./data/prompt_turn_output
+</code></pre>
+<p>   如下图所示：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-16.png" alt=" - "><span class="img-wrapper"><img src="./image/6/6-16.png" alt=" - "></span></label></p>
+<p>这里生成的Prompt 模板文件就是针对我们特定智能客服场景下以及具体的数据，借助大模型生成的符合 Microsoft GraphRAG 索引构建Workflow 的提示词。如果想要使用最新的Prompt 模板文件，则需要将在settings.yaml 文件中配置的prompt_template_path 参数指向最新的Prompt 模板文件。即如下图所示：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-17.png" alt=" - "><span class="img-wrapper"><img src="./image/6/6-17.png" alt=" - "></span></label></p>
+<p>修改好配置后，我们就可以使用最新的Prompt 模板文件来构建Microsoft GraphRAG 索引了。仍然是使用poetry run poe index 命令来构建Microsoft GraphRAG 索引，如下所示：</p>
+<pre><code class="language-bash">    poetry run poe index --root ./data/
+</code></pre>
+<p>全部执行结束后，依然会正常在./data/output 文件夹中生成对应的.parquet 文件，可以直接用于Microsoft GraphRAG 的检索过程。</p>
+<h3 id="非自然语言数据处理"><a class="header" href="#非自然语言数据处理">非自然语言数据处理</a></h3>
+<p>上述的流程我们操作的是非结构化数据，构建的方式是通过提示工程+大模型 借助Microsoft GraphRAG 的Workflow 来构建的。如果大家想操作结构化数据，则需要结合实际的业务场景，将数据集拆分为节点和边，并按照节点类型和边类型分类，符合Neo4j等图数据库的标准导入方式。</p>
+<p>  这个过程其实没什么技巧可谈，一切以业务需求为驱动，考验的就是大家的业务理解能力和数据处理能力，以及知识图谱的构建能力。 比如，我们以电商智能客服 为例，可以先分析一下智能客服场景的需求，主要的点包括：</p>
+<ol>
+<li>需要快速检索产品信息</li>
+<li>需要了解客户的基本信息和订单历史</li>
+<li>需要了解产品与供应商、类别的关系</li>
+<li>需要追踪订单状态和物流信息
+  基于以上需求，我们就可以开始着手划分Neo4j 的节点和边。其中：</li>
+</ol>
+<ul>
+<li>节点类型
+<ul>
+<li>Product - 产品节点</li>
+<li>Category - 产品类别节点</li>
+<li>Supplier - 供应商节点</li>
+<li>Customer - 客户节点</li>
+<li>Employee - 员工节点</li>
+<li>Shipper - 物流公司节点</li>
+<li>Order - 订单节点</li>
+</ul>
+</li>
+<li>边类型
+<ul>
+<li>BELONGS_TO - 产品属于类别</li>
+<li>SUPPLIED_BY - 产品由供应商提供</li>
+<li>PLACED_BY - 订单由客户下单</li>
+<li>PROCESSED_BY - 订单由员工处理</li>
+<li>SHIPPED_VIA - 订单通过物流公司配送</li>
+<li>CONTAINS - 订单包含产品</li>
+<li>REPORTS_TO - 员工上下级关系</li>
+</ul>
+</li>
+</ul>
+<p>节点类型</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-18.png" alt="节点类型"><span class="img-wrapper"><img src="./image/6/6-18.png" alt="节点类型"></span></label></p>
+<p>关系类型</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-19.png" alt="关系类型"><span class="img-wrapper"><img src="./image/6/6-19.png" alt="关系类型"></span></label></p>
+<p>先用脚本对CSV文件进行处理，处理完，直接用Python脚本把内容写到neo4j即可：</p>
+<blockquote>
+<p>附件中的csv文件，名字中带有nodes的文件代表是知识图谱中的实体节点数据，请读取对应文件，理解文件里面表示的含义；名字中带有edges的文件代表是知识图谱中的关系数据。请读取上传的csv的文件，生成一个Python脚本，把所有的文件数据都导入到neo4j图数据库中，需要生成节点数据的就生成节点数据，需要生成关系数据的就生成关系数据。导出数据前先删除原来的数据。</p>
+</blockquote>
+<p>图数据库使用在线的neo4j：https://www.neo4j.com/</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-20.png" alt="图数据库"><span class="img-wrapper"><img src="./image/6/6-20.png" alt="图数据库"></span></label></p>
+<h2 id="企业智能客服pdf数据方案设计与落地"><a class="header" href="#企业智能客服pdf数据方案设计与落地">企业智能客服PDF数据方案设计与落地</a></h2>
+<h3 id="电商客服数据准备-1"><a class="header" href="#电商客服数据准备-1">电商客服数据准备</a></h3>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-21.png" alt=""><span class="img-wrapper"><img src="./image/6/6-21.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-22.png" alt=""><span class="img-wrapper"><img src="./image/6/6-22.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-23.png" alt=""><span class="img-wrapper"><img src="./image/6/6-23.png" alt=""></span></label></p>
+<h3 id="mineru项目安装部署"><a class="header" href="#mineru项目安装部署">minerU项目安装部署</a></h3>
+<h4 id="pdf格式与markdown格式"><a class="header" href="#pdf格式与markdown格式">PDF格式与Markdown格式</a></h4>
+<p>无论是传统RAG还是GraphRAG，PDF格式文件都是最难处理的文件类型，没有之一。主要原因在于PDF格式文件的结构非常复杂，包含文本、图像、表格等多种类型的数据，这几种不同类型的每一部分数据对于 RAG 来说都非常重要，因为很多上下文信息都是通过标题、图片、图表和格式等来传达的，我们需要保留这些信息并进行有效的存储，才能够保证在检索阶段正确识别出有效的文本，从而使大模型能够更好地确定如何“思考”给定内容中提供的信息。</p>
+<p>  我们在实际构建RAG的第一步，往往是先做PDF Parsing，即PDF解析。所谓的PDF Parsing，指的是提取 PDF 文件中的内容并将其转换为结构化格式的过程，对于PDF格式的这种文件特点，就不能像处理.txt、.csv、.json等文件那样，直接使用Python的open函数打开文件，然后逐行读取文件内容，然后进行处理。它涉及分析 PDF 文件的结构和内容以提取有意义的信息，即把PDF文件中的文本、图像、表格和元数据等正确的识别出来，同时还需要解析出PDF文件的结构信息，比如：页眉、页脚、页码、章节、段落、标题等。</p>
+<p>  RAG系统往往是需要依靠高质量的结构化数据来生成准确且与文本相关的输出。PDF 通常用于官方文件、业务报告和法律合同，包含大量信息，但其布局复杂且数据结构不合理。如果做不到精确的 PDF 解析，关键数据就会丢失，从而导致结果不准确并直接影响 RAG 应用程序的有效性。因此，PDF格式文件的索引和检索的流程，在RAG框架中的实现过程如下图所示：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-24.png" alt=""><span class="img-wrapper"><img src="./image/6/6-24.png" alt=""></span></label></p>
+<p>在RAG处理PDF格式文件的解析过程中，将其先转换为Markdown文件再做后处理是目前通用的做法。 Markdown 格式文件自2023年起就一直是在大模型领域的最流行格式，像ChatGPT、DeepSeek等聊天机器人格式化其响应的方式都是使用的Markdown语法，采取的做法都是后端实现流式输出，通过SSE协议将结果返回给前端，前端再通过Markdown语法进行展示。</p>
+<pre><code class="language-bash">Markdown 语法的一些基本示例：
+    # 一级标题
+        ## 二级标题
+        ### 三级标题
+
+        **加粗文本**
+
+        *斜体文本*
+
+        &gt; 引用文本
+
+        [链接文本](https://www.example.org)
+
+        ```
+        代码文本
+        ```
+
+        | 表头1   | 表头2   |
+        |----------|----------|
+        | 表格数据 | 表格数据 |
+</code></pre>
+<p>这种结构优势很明显，比如能给标题、表格、列表、链接等提供结构化的信息，添加了印刷强调元素，例如粗体或斜体，还能提供代码块、数学公式、图片、图表等，即易于编写，又易于阅读，即可以保留文档的原始结构，这包括保留布局、顺序以及不同部分（例如页眉、脚注、表格）之间的连接。对大模型来说，阅读和理解这种类型的输入文档上下文中是非常有效的。也正是因为Markdown格式文件的这种优势，所以现在主流的处理PDF格式文件的库、框架、工具，都是优先针对PDF –&gt; Markdown 提取策略展开研究和优化。</p>
+<h4 id="mineru项目介绍"><a class="header" href="#mineru项目介绍">MinerU项目介绍</a></h4>
+<p>MinerU是一个非常典型的基于管道的解决方案 (Pipeline-based solution) ，并且是一个开源文档解析项目，一共四个核心组件，通过Pipeline的设计无缝衔接，实现比较高效、准确的文档解析。如下图所示：（下图来源官方论文：https://arxiv.org/pdf/2409.18839v1）</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-25.png" alt=""><span class="img-wrapper"><img src="./image/6/6-25.png" alt=""></span></label></p>
+<p>MinerU的主要工作流程分为以下几个阶段：</p>
+<ol>
+<li>输入：接收PDF 格式文本，可以是简单的纯文本，也可以是包含双列文本、公式、表格或图等多模态PDF文件;</li>
+<li>文档预处理（Document Preprocessing）：检查语言、页面大小、文件是否被扫描以及加密状态；</li>
+<li>内容解析（Content Parsing）：
+- 局分析：区分文本、表格和图像。
+- 公式检测和识别：识别公式类型（内联、显示或忽略）并将其转换为 LaTeX 格式。
+- 表格识别：以 HTML/LaTeX 格式输出表格。
+- OCR：对扫描的 PDF 执行文本识别。</li>
+<li>内容后处理（Content Post-processing）：修复文档解析后可能出现的问题。比如解决文本、图像、表格和公式块之间的重叠，并根据人类阅读模式重新排序内容，确保最终输出遵循自然的阅读顺序。</li>
+<li>格式转换（Format Conversion）：以 Markdown 或 JSON 格式生成输出。</li>
+<li>输出（Output）：高质量、结构良好的解析文档。</li>
+</ol>
+<p>MinerU是Github上面非常火的一个开源项目：https://github.com/opendatalab/MinerU</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-26.png" alt=""><span class="img-wrapper"><img src="./image/6/6-26.png" alt=""></span></label></p>
+<p>minerU也提供了在线的试用平台：https://mineru.net/OpenSourceTools/Extractor?source=github</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-27.png" alt=""><span class="img-wrapper"><img src="./image/6/6-27.png" alt=""></span></label></p>
+<p>同时，MinerU 项目于2024年07月05日首次开源，底层主要是集成 PDF-Extract-Kit 开源项目做PDF的内容提取，PDF-Extract-Kit也是一个开源项目：https://github.com/opendatalab/PDF-Extract-Kit</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-28.png" alt=""><span class="img-wrapper"><img src="./image/6/6-28.png" alt=""></span></label></p>
+<p>PDF-Extract-Kit这个项目主要针对的是PDF文档的内容提取，通过集成众多SOTA模型对PDF文件实现高质量的内容提取，其中应用到的模型主要包括：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-29.png" alt=""><span class="img-wrapper"><img src="./image/6/6-29.png" alt=""></span></label></p>
+<p>MinerU与PDF-Extract-Kit的关系是：MinerU 结合PDF-Extract-Kit输出的高质量预测结果，进行了专门的工程优化，使得文档内容提取更加便捷高效，处理底层原理的优化细节外，主要提升点在以下几点：</p>
+<ul>
+<li>加入了自研的doclayout_yolo(2501)模型做布局检测，在相近解析效果情况下比原方案提速10倍以上，可以通过配置文件与 layoutlmv3 自由切换使用；</li>
+<li>加入了自研的unimernet(2501) 模型做公式识别，针对真实场景下多样性公式识别的算法，可以对复杂长公式、手写公式、含噪声的截图公式均有不错的识别效果；</li>
+<li>增加 OCR 的多语言支持，支持 84 种语言的检测与识别，支持列表：https://paddlepaddle.github.io/PaddleOCR/latest/ppocr/blog/multi_languages.html#5</li>
+<li>重构排序模块代码，使用 layoutreader 进行阅读顺序排序，确保在各种排版下都能实现极高准确率 : https://github.com/ppaanngggg/layoutreader</li>
+<li>表格识别功能接入了StructTable-InternVL2-1B模型，大幅提升表格识别效果，模型下载地址:https://huggingface.co/U4R/StructTable-InternVL2-1B</li>
+</ul>
+<p>部署和使用方面，MinerU 支持Linux、Windows、MacOS 多平台部署的本地部署，并且其中用的到布局识别模型、OCR 模型、公式识别模型、表格识别模型都是开源的，我们可以直接下载到本地进行使用。而且，MinerU 项目是完全支持华为昇腾系列芯片的，可适用性非常广且符合国内用户的使用习惯。
+  因此，接下来我们将重点介绍如何在Linux 系统下部署MinerU 项目并进行PDF 文档解析流程实战。注意：这里强烈建议大家使用Linux 系统进行部署，其支持性和兼容性远高于Windows 系统。</p>
+<h3 id="mineru工程化落地方案设计"><a class="header" href="#mineru工程化落地方案设计">minerU工程化落地方案设计</a></h3>
+<h4 id="mineru安装部署"><a class="header" href="#mineru安装部署">minerU安装部署</a></h4>
+<p>部署minerU的环境要求</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-30.png" alt=""><span class="img-wrapper"><img src="./image/6/6-30.png" alt=""></span></label></p>
+<pre><code class="language-bash">##构建虚拟环境，执行环境路径（空间较大），避免依赖过大
+conda create -p /root/autodl-tmp/data/mineru python=3.10
+conda activate /root/autodl-tmp/data/mineru
+
+## 用git下载代码
+git clone https://github.com/opendatalab/MinerU.git
+cd MinerU
+## 项目用uv工具管理，先下个uv
+pip install uv
+## 安装依赖
+uv pip install -e .[core] -i https://mirrors.aliyun.com/pypi/simple
+
+## 下载模型(也可以不执行，执行了会下载较多的模型，占用空间)
+mineru-models-download
+
+## 执行命令
+mineru -d cuda -p ../2025世界人工智能大会全量演讲稿汇总.pdf  -o ../output --source modelscope
+</code></pre>
+<p>mineru –help</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-31.png" alt=""><span class="img-wrapper"><img src="./image/6/6-31.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-32.png" alt=""><span class="img-wrapper"><img src="./image/6/6-32.png" alt=""></span></label></p>
+<p>这里得到的解析文件，就是将用于我们后续构建GraphRAG 时用来作为分块的原始文件，即xxx.md，同时搭配其他的.json文件，可以用来构建丰富的上下文语义信息及语义增强。因此，我们需要了解每个文件中存储的核心结构及内容，分别如下：</p>
+<ol>
+<li>images:这是一个文件夹，里面存储了PDF 文档中出现的所有图片；</li>
+<li>.origin.pdf：进行解析的原始PDF文件；</li>
+<li>.markdown：PDF 文档的解析结果，输出为xxx.md 的 Markdown 格式；</li>
+<li>.layout.pdf：这个文件用不同的背景色块圈定不同的内容块，以此来区分整体的布局识别结果；</li>
+<li>.model.json：这个文件的主要作用是将 PDF 从像素级别的展示转换为结构化的数据，使计算机能够“理解“文档的组成部分。主要存储的信息是：</li>
+</ol>
+<ul>
+<li>文档布局识别：存储文档中的各种元素（标题、正文、图表等）及其在页面上的精确位置</li>
+<li>内容分类：将识别出的元素分类为不同类型（如标题、表格、公式等）</li>
+<li>特殊内容解析：对于公式、表格等特殊内容，提供其结构化表示（如LaTeX、HTML格式）</li>
+</ul>
+<p>其示例数据如下：</p>
+<pre><code class="language-bash">    [{"layout_dets": [{"category_id": 2,
+                    "poly": [99.1906967163086,
+                        100.3119125366211,
+                        730.3707885742188,
+                        100.3119125366211,
+                        730.3707885742188,
+                        245.81326293945312,
+                        99.1906967163086,
+                        245.81326293945312],
+                    "score": 0.9999997615814209}],
+            "page_info": {"page_no": 0,
+                "height": 2339,
+                "width": 1654}},
+        {"layout_dets": [{"category_id": 5,
+                    "poly": [99.13092803955078,
+                        2210.680419921875,
+                        497.3183898925781,
+                        2210.680419921875,
+                        497.3183898925781,
+                        2264.78076171875,
+                        99.13092803955078,
+                        2264.78076171875],
+                    "score": 0.9999997019767761}],
+            "page_info": {"page_no": 1,
+                "height": 2339,
+                "width": 1654}}]
+</code></pre>
+<p>其中每一个layout_dets 中存储了PDF 文档中每一页的布局识别结果，poly 是四边形坐标, 分别是 左上，右上，右下，左下 四点的坐标，形式为：[x0, y0, x1, y1, x2, y2, x3, y3], 分别表示左上、右上、右下、左下四点的坐标，page_info 是PDF 文档中每一页元数据，包含页码、高度、宽度信息，而category_id 为PDF 文档中每一页的布局识别结果的类型，分别为：</p>
+<p>category_id 的类别</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>类别 ID</th><th>类别名称</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>title</td><td>标题</td></tr>
+<tr><td>1</td><td>plain_text</td><td>文本</td></tr>
+<tr><td>2</td><td>abandon</td><td>包括页眉页脚页码和页面注释</td></tr>
+<tr><td>3</td><td>figure</td><td>图片</td></tr>
+<tr><td>4</td><td>figure_caption</td><td>图片描述</td></tr>
+<tr><td>5</td><td>table</td><td>表格</td></tr>
+<tr><td>6</td><td>table_caption</td><td>表格描述</td></tr>
+<tr><td>7</td><td>table_footnote</td><td>表格注释</td></tr>
+<tr><td>8</td><td>isolate_formula</td><td>行间公式</td></tr>
+<tr><td>9</td><td>formula_caption</td><td>行间公式的标号</td></tr>
+<tr><td>13</td><td>embedding</td><td>行内公式</td></tr>
+<tr><td>14</td><td>isolated</td><td>行间公式</td></tr>
+<tr><td>15</td><td>text</td><td>OCR 识别结果</td></tr>
+</tbody>
+</table>
+</div>
+<p>这个.json文件主要可以内容提取，比如精确提取特定类型的内容（如所有表格或公式），搜索，比如实现对文档内容的结构化搜索，文档分析，比如分析文档的结构特征（如有多少图表、公式密度等）等需求场景。</p>
+<ol start="6">
+<li>_middle.json：这个文件的核心作用是存储 PDF 文档解析过程中多层次结构化数据，它比 model.json 提供了更详细的层次结构和内容信息, 其示例数据是这样的：</li>
+</ol>
+<pre><code class="language-bash">{"pdf_info": [{"preproc_blocks": [{"type": "text",
+                        "bbox": [52,
+                            61.956024169921875,
+                            294,
+                            82.99800872802734],
+                        "lines": [{"bbox": [52,
+                                    61.956024169921875,
+                                    294,
+                                    72.0000228881836],
+                                "spans": [{"bbox": [54.0,
+                                            61.956024169921875,
+                                            296.2261657714844,
+                                            72.0000228881836],
+                                        "content": "dependent on the service headway and the reliability of the departure ",
+                                        "type": "text",
+                                        "score": 1.0}]}]}],
+                "layout_bboxes": [{"layout_bbox": [52,
+                            61,
+                            294,
+                            731],
+                        "layout_label": "V",
+                        "sub_layout": []}],
+                "page_idx": 0,
+                "page_size": [612.0,
+                    792.0],
+                "_layout_tree": [],
+                "images": [],
+                "tables": [],
+                "interline_equations": [],
+                "discarded_blocks": [],
+                "para_blocks": [{"type": "text",
+                        "bbox": [52,
+                            61.956024169921875,
+                            294,
+                            82.99800872802734],
+                        "lines": [{"bbox": [52,
+                                    61.956024169921875,
+                                    294,
+                                    72.0000228881836],
+                                "spans": [{"bbox": [54.0,
+                                            61.956024169921875,
+                                            296.2261657714844,
+                                            72.0000228881836],
+                                        "content": "dependent on the service headway and the reliability of the departure ",
+                                        "type": "text",
+                                        "score": 1.0}]}]}]}],
+        "_parse_type": "txt",
+        "_version_name": "0.6.1"}
+</code></pre>
+<p>解析结果是一个多层嵌套，从大到小依次为：PDF 文档 → 包含多个页面 → 包含多个区块(blocks) → 分为一级区块和二级区块 → 每个区块包含多行 → 每行包含多个最小单元， 其中para_blocks内存储的元素为区块信息， span是所有元素的最小存储单元。大家理解了这个结构后，可以结合下图对每个字段进行理解，我们这里不再赘述。</p>
+<p>一级</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>解释</th></tr>
+</thead>
+<tbody>
+<tr><td>pdf_info</td><td>list，每个元素都是一个 dict，这个 dict 是每一页 PDF 的解析结果，详见下表</td></tr>
+<tr><td>_parse_type</td><td>ocr</td></tr>
+<tr><td>_version_name</td><td>string，表示本次解析使用的 magic-pdf 的版本号</td></tr>
+</tbody>
+</table>
+</div>
+<p>二级</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>解释</th></tr>
+</thead>
+<tbody>
+<tr><td>precproc_blocks</td><td>PDF 预处理后，未分段的中间结果</td></tr>
+<tr><td>layout_bbboxes</td><td>布局分割的结果，含有布局的方向（垂直、水平），和 bbox，按阅读顺序排序</td></tr>
+<tr><td>page_idx</td><td>页码，从 0 开始</td></tr>
+<tr><td>page_size</td><td>页面宽度和高度</td></tr>
+<tr><td>_layout_tree</td><td>布局树状结构</td></tr>
+<tr><td>images</td><td>list，每个元素是一个 dict，每个 dict 表示一个 img_block</td></tr>
+<tr><td>tables</td><td>list，每个元素是一个 dict，每个 dict 表示一个 table_block</td></tr>
+<tr><td>interline_equations</td><td>list，每个元素是一个 dict，每个 dict 表示一个 interline_equation_block</td></tr>
+<tr><td>discarded_blocks</td><td>list，模型返回的需要 drop 的 block 信息</td></tr>
+<tr><td>para_blocks</td><td>将 precproc_blocks 进行分段之后的结果</td></tr>
+</tbody>
+</table>
+</div>
+<p>三级（最外层block）</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>解释</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>block 类型（table 或 image）</td></tr>
+<tr><td>bbox</td><td>block 矩形框坐标</td></tr>
+<tr><td>blocks</td><td>list，里面的每个元素都是一个 dict 格式的二级 block</td></tr>
+</tbody>
+</table>
+</div>
+<p>四级（内层block）</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>解释</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>block 类型</td></tr>
+<tr><td>bbox</td><td>block 矩形框坐标</td></tr>
+<tr><td>lines</td><td>list，每个元素都是一个 dict 表示的 line，用来描述一行信息的构成</td></tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>其中 type 类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>image_body</td><td>图像的本体</td></tr>
+<tr><td>image_caption</td><td>图像的描述文本</td></tr>
+<tr><td>image_footnote</td><td>图像的脚注</td></tr>
+<tr><td>table_body</td><td>表格本体</td></tr>
+<tr><td>table_caption</td><td>表格的描述文本</td></tr>
+<tr><td>table_footnote</td><td>表格的脚注</td></tr>
+<tr><td>text</td><td>文本块</td></tr>
+<tr><td>title</td><td>标题块</td></tr>
+<tr><td>index</td><td>目录块</td></tr>
+<tr><td>list</td><td>列表块</td></tr>
+<tr><td>interline_equation</td><td>行间公式块</td></tr>
+</tbody>
+</table>
+</div>
+<p>五级（lines）</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>解释</th></tr>
+</thead>
+<tbody>
+<tr><td>bbox</td><td>line 的矩形框坐标</td></tr>
+<tr><td>spans</td><td>list，每个元素都是一个 dict 表示的 span，用来描述一个最小组单元构成的构成</td></tr>
+</tbody>
+</table>
+</div>
+<p>六级（spans）</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>解释</th></tr>
+</thead>
+<tbody>
+<tr><td>bbox</td><td>span 的矩形框坐标</td></tr>
+<tr><td>type</td><td>span 的类型</td></tr>
+<tr><td>content</td><td>img_path</td></tr>
+</tbody>
+</table>
+</div>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>其中 type 类型</th><th>描述</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>描述</td></tr>
+<tr><td>image</td><td>图片</td></tr>
+<tr><td>table</td><td>表格</td></tr>
+<tr><td>text</td><td>文本</td></tr>
+<tr><td>inline_equation</td><td>行内公式</td></tr>
+<tr><td>interline_equation</td><td>行间公式</td></tr>
+</tbody>
+</table>
+</div>
+<p>该.json文件除了能像model.json一样提取特定类型的内容，因为其内容的丰富程度，可以做更精细化的文本分析，比如段落级别的文本分析，建立更精确的搜索索引，支持按内容类型搜索等。</p>
+<ol start="7">
+<li>span.pdf：根据 span 类型的不同，采用不同颜色线框绘制页面上所有 span。该文件可以用于质检，可以快速排查出文本丢失、行间公式未识别等问题。</li>
+<li>最后一个 .content_list.json 文件，是PDF 文档中所有内容的列表，使用 JSON 格式存储数据，每个元素都是一个字典，包含了不同类型的内容（文本、图像等）。</li>
+</ol>
+<pre><code class="language-bash"> [{
+            // 文本内容块
+            "type": "text",
+            "text": "...",
+            "text_level": N,  // 可选字段
+            "page_idx": N
+        },
+        {
+            // 图像内容块
+            "type": "image",
+            "img_path": "...",
+            "img_caption": [],
+            "img_footnote": [],
+            "page_idx": N
+        },
+        {
+            // 表格内容块
+            "type": "table",
+            "img_path": "...",
+            "table_caption": [],
+            "table_footnote": [],
+            "table_body": "...",
+            "page_idx": N
+        }]
+</code></pre>
+<p>字段说明</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>字段名</th><th>出现位置</th><th>数据类型</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td>type</td><td>所有内容块</td><td>字符串</td><td>内容块的类型，可能的值有: “text”、“image”、“table”</td></tr>
+<tr><td>page_idx</td><td>所有内容块</td><td>整数</td><td>内容所在的页码，从0开始计数</td></tr>
+<tr><td>text</td><td>文本类型块</td><td>字符串</td><td>文本内容</td></tr>
+<tr><td>text_level</td><td>部分文本类型块</td><td>整数</td><td>文本的层级，通常用于标题，1表示一级标题</td></tr>
+<tr><td>img_path</td><td>图像和表格类型块</td><td>字符串</td><td>图像或表格截图的文件路径</td></tr>
+<tr><td>img_caption</td><td>图像类型块</td><td>数组</td><td>图像的说明文字，通常为空数组</td></tr>
+<tr><td>img_footnote</td><td>图像类型块</td><td>数组</td><td>图像的脚注，通常为空数组</td></tr>
+<tr><td>table_caption</td><td>表格类型块</td><td>数组</td><td>表格的说明文字，通常为空数组</td></tr>
+<tr><td>table_footnote</td><td>表格类型块</td><td>数组</td><td>表格的脚注，通常为空数组</td></tr>
+<tr><td>table_body</td><td>表格类型块</td><td>字符串</td><td>表格的HTML内容，包含完整的表格结构</td></tr>
+</tbody>
+</table>
+</div>
+<p>以上是对MinerU解析结果的说明，通过这些文件，我们基本上可以获取到PDF文档中所有内容的位置、类型、内容等信息，理解各个文件的结构，也是我们后续进行自定义处理的关键，所以这里大家务必明确文件及其内部结构的组成。除此以外，除了PDF格式，该流程也可以支持图像（.jpg及.png）、PDF、Word（.doc及.docx）、以及PowerPoint（.ppt及.pptx）在内的多种文档格式的解析，大家可以进行尝试。</p>
+<p>  实践到这里，我们通过CLI工具快速实现了MinerU对PDF文档的解析过程，这个过程并不是很复杂。除此之外，如果想更灵活的控制解析过程，一种更主流的方式是通过Python API 接口来实现，这可以在官方的API Docs中找到详细的说明：https://mineru.readthedocs.io/en/latest/user_guide/usage/api.html ， 大家可以在Python IDE 环境中根据官方的示例进行接口级别的解析测试。</p>
+<h4 id="mineru封装restful-api-接口"><a class="header" href="#mineru封装restful-api-接口">minerU封装RESTful API 接口</a></h4>
+<p>MinerU 作为一个比较重的工具，其解析过程涉及调用多个模型，所以其解析速度相对较慢，所以需要在解析效果和响应速度之间进行平衡。除此以外，在Microsoft GraphRAG 项目中，我们主要将其作为PDF文档解析工具，用于将PDF文档解析为Markdown格式，然后作为GraphRAG 的输入，进行知识图谱的构建。而如果集成到Microsoft GraphRAG 项目中，则会产生项目上的冗余，不利于后续的维护，所以这里我们需要采用服务化的方式，将MinerU 作为一个独立的服务，在 Microsoft GraphRAG 项目中只保留MinerU 的调用接口。</p>
+<p>因此，我们需要将MinerU封装成一个服务，并提供RESTful API 接口，以便Microsoft GraphRAG 项目中直接进行调用。在这个封装的过程中，我们再去结合具体使用的框架综合考虑效率优化等问题。
+这里我们采用的是一个 LitServe 框架去做多GPU的并行解析，并基于该框架提供RESTful API 接口。</p>
+<p>我们之前的项目经常使用FastAPI 框架去封装后端服务的RESTful API 接口，而LitServe 框架适用于基于 FastAPI 构建的模型后端服务，主要通过批处理、流式处理和 GPU 自动扩缩等功能增强了 FastAPI, 并且其评测结果显示会比普通的 FastAPI 快至少2倍。其开源地址如下：<a href="https://github.com/Lightning-AI/LitServe">https://github.com/Lightning-AI/LitServe</a></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-33.png" alt=""><span class="img-wrapper"><img src="./image/6/6-33.png" alt=""></span></label></p>
+<p>MinerU 的源码中提供了一个LitServe 的基础服务，其源码存放位置为MinerU-master/projects中的multi_gpu_v2 文件夹。</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-34.png" alt=""><span class="img-wrapper"><img src="./image/6/6-34.png" alt=""></span></label></p>
+<pre><code class="language-bash">cd /root/autodl-tmp/MinerU/projects/multi_gpu_v2
+</code></pre>
+<p>我们进入multi_gpu_v2 文件夹，可以看到LitServe 的基础服务，其提供了三个文件，分别是server.py、client.py 和README.md。其中server.py 文件是LitServe 的基础服务，client.py 文件是LitServe 的客户端，README.md 文件是LitServe 的说明文档。 而我们需要调整的是server.py 文件，其内部会定义LitServe 的RESTful API 接口，并提供LitServe 的RESTful API 接口的调用方法。</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-35.png" alt=""><span class="img-wrapper"><img src="./image/6/6-35.png" alt=""></span></label></p>
+<p>启动服务之前，需要修改server.py文件</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-36.png" alt=""><span class="img-wrapper"><img src="./image/6/6-36.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-37.png" alt=""><span class="img-wrapper"><img src="./image/6/6-37.png" alt=""></span></label></p>
+<pre><code class="language-bash">#完成以上自定义配置后，回到服务器终端，依次执行如下三条命令安装LitServe服务运行所需要的依赖环境：
+pip install -U litserve python-multipart filetype
+pip install paddlepaddle-gpu==3.0.0b1 -i https://www.paddlepaddle.org.cn/packages/stable/cu118
+
+# 启动脚本
+python server.py
+</code></pre>
+<p>如果遇到下面的报错：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-38.png" alt=""><span class="img-wrapper"><img src="./image/6/6-38.png" alt=""></span></label></p>
+<p>解决方案：</p>
+<pre><code>升级 NCCL 到兼容版本
+#通过 Conda 安装最新 NCCL (推荐)
+conda install -c nvidia nccl
+
+检查并修复 PyTorch 环境
+#确保 PyTorch 版本与 CUDA 匹配
+pip uninstall torch torchvision torchaudio
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118  # 替换为您的 CUDA 版本
+</code></pre>
+<pre><code class="language-bash"># 再次重启
+python server.py
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-39.png" alt=""><span class="img-wrapper"><img src="./image/6/6-39.png" alt=""></span></label></p>
+<p>使用AutoDL平台的代理</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-40.png" alt=""><span class="img-wrapper"><img src="./image/6/6-40.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-41.png" alt=""><span class="img-wrapper"><img src="./image/6/6-41.png" alt=""></span></label></p>
+<p>如果浏览器网页中出现litserver running 的提示，则说明MinerU 的RESTful API 接口服务已经正常启动，并监听在http://ip:port 端口上，否则需要检查server.py 文件中的配置是否正确，以及网络连接是否正常。</p>
+<p>准备好了MinerU 的RESTful API 接口服务后，接下来的工作就是在Microsoft GraphRAG 项目中进行集成。</p>
+<h3 id="graphrag和mineru整合"><a class="header" href="#graphrag和mineru整合">GraphRAG和minerU整合</a></h3>
+<h4 id="pdf多模态数据处理方案整体架构设计"><a class="header" href="#pdf多模态数据处理方案整体架构设计">PDF多模态数据处理方案整体架构设计</a></h4>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-42.png" alt=""><span class="img-wrapper"><img src="./image/6/6-42.png" alt=""></span></label></p>
+<h4 id="graphrag加载数据策略设计与实现"><a class="header" href="#graphrag加载数据策略设计与实现">GraphRAG加载数据策略设计与实现</a></h4>
+<p>GprahRAG项目加载数据</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-43.png" alt=""><span class="img-wrapper"><img src="./image/6/6-43.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-44.png" alt=""><span class="img-wrapper"><img src="./image/6/6-44.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-45.png" alt=""><span class="img-wrapper"><img src="./image/6/6-45.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-46.png" alt=""><span class="img-wrapper"><img src="./image/6/6-46.png" alt=""></span></label></p>
+<p>minerU项目传送数据</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-47.png" alt=""><span class="img-wrapper"><img src="./image/6/6-47.png" alt=""></span></label></p>
+<pre><code class="language-bash">@app.get("/download_output_files")
+async def download_output_files(output_dir: str):
+    """
+    下载指定输出目录中的所有文件
+
+    参数:
+    - output_dir: 输出目录路径
+
+    返回:
+    - 包含所有文件的ZIP压缩包
+    """
+    try:
+        # 打印接收到的路径，用于调试
+        print(f"接收到的output_dir: {output_dir}")
+
+        # 确保路径格式正确
+        output_dir = output_dir.rstrip('/')
+
+        # 关键修复：处理路径中的auto子目录
+        # 如果路径不存在但路径中包含/auto，尝试移除它
+        dir_path = Path(output_dir)
+        if not dir_path.exists() and '/auto' in output_dir:
+            output_dir = output_dir.replace('/auto', '')
+            dir_path = Path(output_dir)
+            print(f"尝试移除/auto后的路径: {dir_path}")
+
+        # 如果路径仍然不存在，尝试添加/auto
+        if not dir_path.exists() and '/auto' not in output_dir:
+            output_dir = f"{output_dir}/auto"
+            dir_path = Path(output_dir)
+            print(f"尝试添加/auto后的路径: {dir_path}")
+
+        # 列出父目录内容，帮助调试
+        parent_dir = str(Path(output_dir).parent)
+        print(f"父目录: {parent_dir}")
+        if os.path.exists(parent_dir):
+            print(f"父目录内容: {os.listdir(parent_dir)}")
+        else:
+            print(f"父目录不存在: {parent_dir}")
+
+        print(
+            f"转换后的路径: {dir_path}, 存在: {dir_path.exists()}, 是目录: {dir_path.is_dir() if dir_path.exists() else False}")
+
+        # 直接检查目录是否存在，如果不存在，尝试在父目录或其他可能的位置查找
+        if not dir_path.exists() or not dir_path.is_dir():
+            # 尝试在父目录中查找
+            base_tmp_dir = parent_dir
+
+            # 如果父目录不存在，尝试使用MinerUAPI的output_dir
+            if not os.path.exists(base_tmp_dir):
+                base_tmp_dir = str(server.api.output_dir)
+                print(f"使用API的output_dir: {base_tmp_dir}")
+
+            if os.path.exists(base_tmp_dir):
+                # 获取目录名的关键部分
+                basename = os.path.basename(output_dir)
+                # 移除可能的auto后缀
+                if basename == "auto" and output_dir != f"{base_tmp_dir}/auto":
+                    basename = os.path.basename(os.path.dirname(output_dir))
+
+                # 直接列出base_tmp_dir中的所有目录
+                tmp_contents = os.listdir(base_tmp_dir)
+                print(f"{base_tmp_dir}目录内容: {tmp_contents}")
+
+                # 尝试精确匹配
+                if basename in tmp_contents:
+                    dir_path = Path(os.path.join(base_tmp_dir, basename))
+                    print(f"找到精确匹配的目录: {dir_path}")
+                else:
+                    # 尝试部分匹配
+                    parts = basename.split('_')
+                    if len(parts) &gt; 0:
+                        # 尝试匹配时间戳部分
+                        timestamp_part = parts[0]
+                        matching_dirs = [d for d in tmp_contents if timestamp_part in d]
+                        if matching_dirs:
+                            dir_path = Path(os.path.join(base_tmp_dir, matching_dirs[0]))
+                            print(f"找到匹配时间戳的目录: {dir_path}")
+                        elif len(parts) &gt; 1:
+                            # 尝试匹配UUID部分
+                            uuid_part = parts[1].split('/')[0]
+                            matching_dirs = [d for d in tmp_contents if uuid_part in d]
+                            if matching_dirs:
+                                dir_path = Path(os.path.join(base_tmp_dir, matching_dirs[0]))
+                                print(f"找到匹配UUID的目录: {dir_path}")
+                            else:
+                                # 最后尝试：按修改时间排序，取最新的
+                                tmp_dirs = [os.path.join(base_tmp_dir, d) for d in tmp_contents if
+                                            os.path.isdir(os.path.join(base_tmp_dir, d))]
+                                if tmp_dirs:
+                                    tmp_dirs.sort(key=lambda x: os.path.getmtime(x), reverse=True)
+                                    dir_path = Path(tmp_dirs[0])
+                                    print(f"使用最新的目录: {dir_path}")
+                                else:
+                                    # 如果在当前目录找不到，尝试在MinerUAPI的output_dir中查找
+                                    if base_tmp_dir != str(server.api.output_dir):
+                                        print(
+                                            f"在{base_tmp_dir}中找不到匹配的目录，尝试在{server.api.output_dir}中查找")
+                                        return await download_output_files(f"{server.api.output_dir}/{basename}")
+                                    else:
+                                        raise HTTPException(status_code=404,
+                                                            detail=f"找不到匹配的目录: {output_dir}")
+                    else:
+                        # 如果无法解析目录名，尝试在MinerUAPI的output_dir中查找
+                        if base_tmp_dir != str(server.api.output_dir):
+                            print(f"无法解析目录名，尝试在{server.api.output_dir}中查找")
+                            return await download_output_files(f"{server.api.output_dir}/{basename}")
+                        else:
+                            raise HTTPException(status_code=404, detail=f"无法解析目录名: {output_dir}")
+            else:
+                # 如果基础目录不存在，尝试在MinerUAPI的output_dir中查找
+                if base_tmp_dir != str(server.api.output_dir):
+                    print(f"基础目录{base_tmp_dir}不存在，尝试在{server.api.output_dir}中查找")
+                    return await download_output_files(f"{server.api.output_dir}/{os.path.basename(output_dir)}")
+                else:
+                    raise HTTPException(status_code=404, detail=f"基础目录不存在: {base_tmp_dir}")
+
+        # 再次检查目录是否存在
+        if not dir_path.exists() or not dir_path.is_dir():
+            # 最后尝试：如果所有尝试都失败，检查是否可以直接使用MinerUAPI的output_dir
+            if str(dir_path) != str(server.api.output_dir):
+                print(f"找不到有效的目录{dir_path}，尝试使用{server.api.output_dir}")
+                return await download_output_files(str(server.api.output_dir))
+            else:
+                raise HTTPException(status_code=404, detail=f"找不到有效的目录: {output_dir}")
+
+        # 创建临时文件用于存储ZIP
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.zip')
+        temp_file.close()
+
+        print(f"将打包目录: {dir_path}")
+
+        # 创建ZIP文件
+        with zipfile.ZipFile(temp_file.name, 'w', zipfile.ZIP_DEFLATED) as zipf:
+            # 遍历目录中的所有文件和子目录
+            file_count = 0
+            dir_count = 0
+            for root, dirs, files in os.walk(dir_path):
+                print(f"遍历目录: {root}, 包含文件数: {len(files)}, 子目录数: {len(dirs)}")
+
+                # 添加空目录
+                for dir_name in dirs:
+                    dir_path_full = os.path.join(root, dir_name)
+                    # 计算目录在ZIP中的相对路径
+                    dir_arcname = os.path.relpath(dir_path_full, dir_path) + '/'
+                    # 创建目录条目
+                    zipinfo = zipfile.ZipInfo(dir_arcname)
+                    zipinfo.external_attr = 0o755 &lt;&lt; 16  # 设置目录权限
+                    zipf.writestr(zipinfo, '')
+                    dir_count += 1
+                    print(f"添加目录: {dir_arcname}")
+
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    # 计算文件在ZIP中的相对路径
+                    arcname = os.path.relpath(file_path, dir_path)
+                    # 添加文件到ZIP
+                    zipf.write(file_path, arcname)
+                    file_count += 1
+
+        print(f"总共添加了 {file_count} 个文件和 {dir_count} 个目录到ZIP")
+
+        # 返回ZIP文件供下载
+        zip_size = os.path.getsize(temp_file.name)
+        print(f"生成的ZIP文件大小: {zip_size} 字节")
+        return FileResponse(
+            path=temp_file.name,
+            filename=f"{os.path.basename(output_dir)}.zip",
+            media_type="application/zip",
+            background=None  # 在响应发送后删除临时文件
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"下载文件失败，错误: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"下载文件失败: {str(e)}")
+</code></pre>
+<p>加入的新的代码以后，执行：python server.py 之前，有两个步骤需要操作：</p>
+<ul>
+<li>
+<ol>
+<li>安装依赖：pip install –upgrade PyMuPDF</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>把默认加载模型的网站改为modelscope</li>
+</ol>
+</li>
+</ul>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-48.png" alt=""><span class="img-wrapper"><img src="./image/6/6-48.png" alt=""></span></label></p>
+<p>运行：python server.py</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-49.png" alt=""><span class="img-wrapper"><img src="./image/6/6-49.png" alt=""></span></label></p>
+<p>完整的数据后处理的思路如下：</p>
+<ol>
+<li>调用 MinerU 的 do_parse RestFul API 接口，将本地的文件上传PDF依次传到 MinerU 服务上进行解析；</li>
+<li>调用 MinerU 的 download_output_files RestFul API 接口，将解析后的所有文件拉取到项目代码的运行环境（一般企业场景需要搭配专业的文件服务器）；</li>
+<li>读取 xxx.md 文件，获取 PDF 文件的文本内容，这里面包含：纯文本、图片、表格、公式等；</li>
+<li>在进行文本分块之前，先进行语义增强和文本优化，主要包括以下几点：</li>
+</ol>
+<ul>
+<li>对于表格数据：
+<ol>
+<li>首先提取结构化数据，从 model.json 文件中，根据 category_id 是否等于 5， 提取出都有哪些表格；</li>
+<li>调用大模型接口，对表格进行总结和摘要，作为额外描述添加到元数据中；</li>
+</ol>
+</li>
+<li>对于图片数据：
+<ol>
+<li>从 content_list.json 文件中，根据 type 找到图片，并提取其前后文，作为图片的背景信息（因为按照一般的逻辑，当出现图片的时候，前文或者后文会对图片有相关的描述或解释性文字）；</li>
+<li>从本地对应的PDF解析文件中找到Images文件夹，获取到所有的图片路径；</li>
+<li>调用视觉模型对图片生成详细的描述，包括图片中的内容、对象、场景、布局等关键信息，作为额外描述添加的元数据中；</li>
+</ol>
+</li>
+</ul>
+<ol start="5">
+<li>将表格、图片的元数据以注释形式插入到第3步读取的Markdown文本中，组成最终要用于后续做text_units切分的原始文本，形式为：</li>
+</ol>
+<pre><code class="language-bash">    &lt;!-- METADATA
+    type: table
+    description: "下表展示了2023年各季度销售额对比..."
+    source_page: 5
+    parent_headings: ["## 实验结果"]
+    --&gt;
+    该表格统计了2023年各季度的销售额（见下表）：
+    | 季度 | 销售额（万元） |
+    |------|----------------|
+    | Q1   | 120            |
+</code></pre>
+<h4 id="graphrag切割数据策略设计与实现"><a class="header" href="#graphrag切割数据策略设计与实现">GraphRAG切割数据策略设计与实现</a></h4>
+<p>PDF包含文本、图像和表格，所以在分块时也常被称多模式分块，涉及处理单个文档中的多种类型的数据（例如文本、图像和表格）。比如有一些常见的切分方法：</p>
+<ul>
+<li>基本策略：将文档的连续部分组合起来以填充每个块，确保它们不超过指定的大小。其中表格被单独处理，如果太大，进行拆分。</li>
+<li>按标题策略：保留章节边界，每当新章节或页面开始时，就从新区块开始。合并较小的章节，以避免区块过小。</li>
+<li>按页面策略：这种方法可确保来自不同页面的内容不会出现在同一个块中。每个新页面都会开始一个新的块。</li>
+<li>按相似度策略：使用大模型来识别和分组相似内容。所需的相似度级别可以调整。
+不同的切分方法其实都涉及两个主要问题： 如果处理表格，如何处理图片。传统RAG常用固定大小的分块，比如512个token，但可能破坏表格结构，其次GraphRAG需要更语义化的分块，比如按章节或段落。同时，是否需要重叠块来保持上下文联系，最后，表格的处理是关键，因为表格的结构信息一旦破坏，模型可能无法正确理解。图片的话，转成Markdown后可能只是图片链接，需要OCR提取文字或添加描述。
+  而上面三个核心的问题，我们在PDF文档加载器中已经全部解决，因此，这里我们实现的是核心策略：结构感知分块（Structure-aware Chunking），具体来看：</li>
+<li>首先按标题层级划分主块：将文档按一级标题（#）分割为顶级块，再按二级标题（##）划分子块，同时保持标题下的所有内容（文本、表格、图片）在同一个块中。</li>
+<li>动态块大小调整：对于文本块，使用滑动窗口分割，并允许窗口间重叠，表格/图片块：单独成块，不分割，直接关联描述和上下文。</li>
+</ul>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-50.png" alt=""><span class="img-wrapper"><img src="./image/6/6-50.png" alt=""></span></label></p>
+<h4 id="总体方案代码联调"><a class="header" href="#总体方案代码联调">总体方案代码联调</a></h4>
+<p>步骤1：minerU里启动server.py服务</p>
+<pre><code class="language-bash">python server.py
+</code></pre>
+<p>步骤2：GraphRAG里执行解析任务</p>
+<pre><code class="language-bash">## 在项目的根目录下执行
+poetry run poe index --root ./data
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-51.png" alt=""><span class="img-wrapper"><img src="./image/6/6-51.png" alt=""></span></label></p>
+<h2 id="企业级智能客服graphrag工程化方案落地"><a class="header" href="#企业级智能客服graphrag工程化方案落地">企业级智能客服GraphRAG工程化方案落地</a></h2>
+<h3 id="企业智能客服数据总体架构设计"><a class="header" href="#企业智能客服数据总体架构设计">企业智能客服数据总体架构设计</a></h3>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-52.png" alt=""><span class="img-wrapper"><img src="./image/6/6-52.png" alt=""></span></label></p>
+<h3 id="graphrag工程化设计与实现"><a class="header" href="#graphrag工程化设计与实现">GraphRAG工程化设计与实现</a></h3>
+<h4 id="graphrag源码已有功能梳理"><a class="header" href="#graphrag源码已有功能梳理">GraphRAG源码已有功能梳理</a></h4>
+<p>到目前为止，我们一共对GraphRAG做了如下的优化改造：</p>
+<ol>
+<li>对.csv文件的索引流程做了优化， 不再使用简单的按照token数量切分，而是结合csv 文件的预处理流程，构建分层分级动态切分，从而保证每个row 可以保留完整的语义；</li>
+<li>自定义集成了支持并行解析的MinerU服务，支持对PDF格式、图像（.jpg及.png）、Word（.doc及.docx）、以及PowerPoint（.ppt及.pptx）在内的多种文档格式的文档解析；</li>
+<li>支持对图像、表格类型数据的分析和处理，接入多模态（视觉）模型对图片和表格进行分析，并生成对应的文本描述，从而保证GraphRAG 可以处理更多的数据类型；</li>
+<li>新增 PDF 等格式文件的文档切分器，通过结构感知动态分块策略，有效保留文本和表格/图谱多模式语义组合长文本及图像、表格等单独语义的隔离；</li>
+</ol>
+<p>但是到目前，我们还是用的这两种方式提供的GraphRAG的服务：CLI 和 Poe</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>特性</th><th>CLI 启动方式</th><th>Poe 启动方式</th></tr>
+</thead>
+<tbody>
+<tr><td>安装方式</td><td>pip 安装</td><td>源码安装</td></tr>
+<tr><td>启动方式</td><td>在控制台输入命令启动</td><td>在控制台输入命令启动</td></tr>
+<tr><td>可用参数</td><td>根据 –help 提供的参数指定构建索引/检索流程</td><td>可以任意添加参数，满足定制化的需求</td></tr>
+<tr><td>灵活度</td><td>灵活度低，无法满足一些特殊的需求</td><td>灵活度高，可以修改源码，任意添加参数</td></tr>
+</tbody>
+</table>
+</div>
+<p>很明显，这样没办法跟我们的其它服务或者前端打通，所以接下来我们需要把GraphRAG的核心服务器封装成restful的接口。
+但是这个大家也别担心，我们不需要写很多的代码逻辑，因为GraphRAG也考虑到了这个问题，所以提供好了接口，我们只需要基于这些接口再做简单的封装即可。</p>
+<p>GraphRAG提供好的接口的源码位置是在这个地方：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-53.png" alt=""><span class="img-wrapper"><img src="./image/6/6-53.png" alt=""></span></label></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>文件</th><th>功能</th></tr>
+</thead>
+<tbody>
+<tr><td>prompt_tunne.py</td><td>1. 动态提示词模板生成</td></tr>
+<tr><td>index.py</td><td>1. 构建索引<br>2. 增量更新索引</td></tr>
+<tr><td>query.py</td><td>1. 支持4种查询方式：basic, local, global, drift</td></tr>
+</tbody>
+</table>
+</div>
+<p>对于我们来说，我们核心也是提供这样的四个接口能力：</p>
+<ol>
+<li>动态提示词模板生成的接口</li>
+<li>索引构建的接口</li>
+<li>增量索引更新的接口</li>
+<li>查询的接口</li>
+</ol>
+<h4 id="动态提示词模块接口设计"><a class="header" href="#动态提示词模块接口设计">动态提示词模块接口设计</a></h4>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-54.png" alt=""><span class="img-wrapper"><img src="./image/6/6-54.png" alt=""></span></label></p>
+<p>核心代码：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-55.png" alt=""><span class="img-wrapper"><img src="./image/6/6-55.png" alt=""></span></label></p>
+<p>其实核心接口源码里已经实现了，我们就是基于这个接口再完善一下即可。</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-56.png" alt=""><span class="img-wrapper"><img src="./image/6/6-56.png" alt=""></span></label></p>
+<p>核心的参数设置：</p>
+<pre><code class="language-bash"># GraphRAG项目根目录路径
+PROJECT_DIR = "/root/autodl-tmp/kefu2/graphrag"
+
+# 数据目录名称（相对于项目根目录）
+DATA_DIR_NAME = "data"
+
+# 文档块大小
+CHUNK_SIZE = 500
+
+# 文档块重叠大小
+OVERLAP = 100
+
+# 要加载的文档块数量限制
+# 注意：如果文档较少，请设置较小的值
+LIMIT = 5
+
+# 文档选择方法: "random", "auto", "all", "top"
+# 参考DocSelectionType枚举的有效值
+SELECTION_METHOD = "random"
+
+# 领域（为None则自动检测）
+DOMAIN = None
+
+# 语言（为None则自动检测）
+LANGUAGE = None
+
+# 提示词最大令牌数
+MAX_TOKENS = 4000
+
+# 是否自动发现实体类型
+DISCOVER_ENTITY_TYPES = True
+
+# 最小所需的示例数
+MIN_EXAMPLES_REQUIRED = 2
+
+# 嵌入子集最大数量（对auto选择方法有效）
+N_SUBSET_MAX = 300
+
+# 文档选择数量（对auto选择方法有效）
+K = 15
+
+# 输出目录
+OUTPUT_DIR = "/root/autodl-tmp/kefu2/graphrag/data/pdf_prompt_turn_output"
+</code></pre>
+<p>setting.yaml文件设置
+1）模型配置</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-57.png" alt=""><span class="img-wrapper"><img src="./image/6/6-57.png" alt=""></span></label></p>
+<p>对应的.env文件</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-58.png" alt=""><span class="img-wrapper"><img src="./image/6/6-58.png" alt=""></span></label></p>
+<p>2）读取文件配置</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-59.png" alt=""><span class="img-wrapper"><img src="./image/6/6-59.png" alt=""></span></label></p>
+<p>数据准备：</p>
+<pre><code class="language-bash"># 小米、华为与阿里巴巴：中国科技巨头的崛起与全球化战略
+
+在21世纪的中国商业史上，小米、华为和阿里巴巴无疑是三颗最耀眼的明星。它们分别代表了智能手机、通信设备和电子商务领域的中国力量，不仅在国内市场占据主导地位，更在全球范围内产生了深远影响。本文将深入剖析这三家科技巨头的发展历程、商业模式、全球化战略及未来挑战，展现中国科技企业的创新力量与全球竞争力。
+
+## 小米：从性价比之王到全球智能生态领导者
+
+小米公司的创业故事堪称中国互联网时代的经典案例。2010年4月6日，北京中关村银谷大厦807室，雷军和几位联合创始人喝下一碗小米粥，一家名为"小米"的公司悄然成立。当时没人能想到，这碗"小米粥"会在未来十年搅动全球科技行业的格局。雷军曾是中国软件行业的传奇人物，金山软件的掌舵人，却在40岁这年选择"归零重启"，他坦言："我害怕被时代抛弃，害怕成为那个只会回忆过去的人。"这种危机感催生了小米的核心理念——"为发烧而生"。
+
+### 商业模式革命：铁人三项战略
+
+2011年8月16日，小米1发布，定价1999元，配置却堪比当时三四千元的旗舰机型。这不是简单的价格战，而是一场商业模式的革命。小米采用了"硬件+软件+互联网服务"的铁人三项模式：硬件贴近成本定价、MIUI系统通过用户反馈快速迭代、电商直销砍掉中间环节。这种模式让传统手机厂商措手不及，一位行业分析师回忆："当时很多厂商的高管都在拆解小米手机，试图理解为什么他们能卖这个价格。"
+
+小米早期通过MIUI论坛与用户共创，这种深度互动塑造了产品，体现了"用户思维比技术更重要"的理念。2014年，小米售出6112万部智能手机，销售额达743亿元，超越三星成为中国市场第一。同年12月，小米获得11亿美元投资，估值达450亿美元。
+
+### 生态链布局与国际化扩张
+
+2014-2016年，小米遭遇"成长的烦恼"——供应链问题、产品同质化、线下渠道薄弱等问题集中爆发。雷军后来反思："我们跑得太快，有些基础没打牢。"关键时刻，小米做了几个关键决策：组建"特种部队"解决供应链问题、启动"新零售"战略三年开1000家小米之家、全面进军国际市场。
+
+印度成为小米国际化的第一站。通过本土化运营和性价比策略，小米在印度市场占有率从2015年的3%飙升至2018年的28%，反超三星成为第一。同时，小米生态链可能是商业史上最成功的生态布局之一。从移动电源到空气净化器，从扫地机器人到电动滑板车，小米通过"投资+孵化"模式，培育了上百家生态链企业。这种"竹林效应"让小米在手机增长放缓时仍能保持品牌热度。
+
+### 高端化转型与汽车业务突破
+
+近年来，小米加大在高端智能手机、汽车和人工智能领域的投入。2025年8月，小米公布了固态电池技术专利，续航里程超过1200公里，10分钟快充可行驶800公里。这项技术采用固态电解质，能量密度达1000Wh/L以上，安全性大幅提升，即使在800度高温下也能保持稳定。同时，小米汽车YU7车型搭载了自研540°全景环视系统，结合360°全景影像与180°底盘透视功能，展现了小米在智能驾驶辅助技术方面的实力。
+
+2018年，小米在香港上市，开启了新阶段的发展。如今的小米已从"性价比代表"向"高端科技品牌"转型，其愿景是"让全球每个人都能享受科技带来的美好生活"。正如雷军常说："永远相信美好的事情即将发生。"
+
+## 华为：从通信设备商到全球科技领军者
+
+华为的创业故事同样传奇。1987年，任正非在深圳创立华为，初始资本仅2.1万元。公司最初代理香港公司的PBX交换机，后来转向自主研发。1990年代，华为在农村市场积累经验，逐步攻克城市市场和国际市场。
+
+### 通信设备领域的全球扩张
+
+2000年左右，华为开始国际化，首先进入发展中国家市场，然后进军欧洲等发达市场。通过高性价比和本地化服务，华为逐渐成为全球通信设备市场的主要玩家。2012年，华为超越爱立信成为全球最大电信设备制造商。
+
+在5G技术研发上，华为投入巨大。截至2020年，华为拥有全球最多的5G标准必要专利，成为5G技术的领导者。尽管面临国际政治压力，华为仍在全球获得了大量5G商用合同。
+
+### 消费者业务的崛起与创新
+
+2010年后，华为消费者业务迅速成长。Mate和P系列智能手机凭借卓越的拍照能力和长续航等特点，赢得了全球高端用户的青睐。华为还开发了自己的图像处理芯片和算法，与徕卡合作提升了手机摄影水平。
+
+面对美国的制裁，华为加速推进自主创新。2019年，华为推出自研操作系统HarmonyOS（鸿蒙），旨在构建全场景智慧生态。2021年，HarmonyOS 2.0发布，装机量迅速突破亿级。华为还大力发展HMS（华为移动服务），以替代谷歌的GMS。
+
+### 云计算与企业业务的发展
+
+华为云近年来增长迅速，已成为中国第二大、全球前五的云服务提供商。华为在企业业务领域提供数字化转型解决方案，服务政府、金融、交通等多个行业。华为还大力发展人工智能芯片和计算框架，推出昇腾系列AI处理器。
+
+任正非提出的"狼性文化"和"长期投入研发"的战略，使华为在全球科技竞争中保持韧性。华为每年将10%-15%的营收投入研发，在全球设立多个研究所，吸引顶尖人才。
+
+## 阿里巴巴：构建数字经济生态系统
+
+阿里巴巴的故事始于1999年马云在杭州的公寓里创办的Alibaba.com。最初的使命是"让天下没有难做的生意"，服务中小企业进行国际贸易。2003年，阿里巴巴推出淘宝网，开创了中国C2C电商的新纪元。
+
+### 电商帝国的建立与创新
+
+2004年，支付宝从淘宝分拆独立，解决了网络交易的信任问题。2008年，淘宝商城（后改名天猫）上线，开拓B2C市场。阿里巴巴不断创新电商模式，推出了"双11"购物节，创造了全球网购奇迹。
+
+2014年，阿里巴巴在纽交所上市，融资250亿美元，成为当时全球最大IPO。阿里逐渐形成了以电商为核心，涵盖支付、物流、云计算、数字娱乐等业务的数字经济体。
+
+### 数字经济生态的扩展
+
+2009年，阿里云成立，如今已成为全球第三大云计算服务商。阿里云支撑了"双11"的海量交易，其技术能力得到全球认可。在物流领域，2013年成立的菜鸟网络通过智能物流骨干网，大幅提升了中国物流效率。
+
+近年来，阿里巴巴加速整合本地生活服务。2025年8月，淘天集团正式更名，与饿了么、飞猪形成平行架构，强化协同效应。数据显示，淘宝闪购与饿了么资源互通后，日订单总量突破4000万单。阿里还推出了整合饿了么、飞猪等资源的大会员体系，覆盖多元生活场景。
+
+### 技术创新与社会责任
+
+阿里巴巴在人工智能、区块链、量子计算等前沿技术领域均有布局。达摩院成立于2017年，专注于基础科学和颠覆性技术创新。阿里还积极推动乡村振兴和中小企业数字化，践行"让天下没有难做的生意"的使命。
+
+马云提出的"新零售"概念引领行业变革，盒马鲜生、银泰商业等成为线上线下融合的典范。阿里巴巴正从电商平台向数字经济基础设施提供商转变，推动整个社会的数字化转型。
+
+## 三巨头的全球化战略比较
+
+小米、华为和阿里巴巴采取了不同的全球化策略，但都取得了显著成就。
+
+小米的国际化采取"先易后难"策略，首先进入印度、东南亚等新兴市场，再进军欧洲。小米在印度复制了中国的成功模式，通过高性价比和线上销售迅速占领市场。2020年，小米全球智能手机出货量达到1.46亿台，成为全球第三大手机厂商。
+
+华为的全球化更加全面，在电信设备、智能手机和企业业务三个领域同时推进。华为在170多个国家和地区开展业务，研发中心遍布全球。华为坚持"全球化思维，本地化运营"，在不同市场采取差异化策略。
+
+阿里巴巴的全球化聚焦于电子商务和云计算。通过收购Lazada、投资Tokopedia等，阿里巴巴加强了在东南亚的影响力。全球速卖通(AliExpress)服务全球消费者，阿里云在美国、欧洲、中东等地建立数据中心。阿里巴巴还提出"电子世界贸易平台"(eWTP)倡议，推动全球跨境电商规则制定。
+
+## 面临的挑战与未来展望
+
+尽管取得了巨大成功，这三家公司都面临着严峻挑战。
+
+小米需要平衡性价比与高端化的矛盾，提升品牌溢价能力。造车业务投入巨大，可能影响公司盈利能力。国际政治经济环境的不确定性也给全球化带来挑战。
+
+华为面临的地缘政治压力最大，芯片供应受限严重影响手机业务。华为需要加快核心技术自主创新，构建完整的生态系统。云计算和企业业务成为新的增长点，但竞争激烈。
+
+阿里巴巴面临国内电商增长放缓的压力，拼多多、抖音电商等竞争者不断蚕食市场份额。反垄断监管趋严，要求平台更加规范发展。阿里需要找到新的增长引擎，持续创新商业模式。
+
+展望未来，这三家中国科技巨头将继续在全球舞台上发挥重要作用。小米致力于打造全球最大的消费级IoT平台；华为坚持技术创新，构建万物互联的智能世界；阿里巴巴推动商业基础设施数字化，让天下没有难做的生意。它们的成功不仅是中国企业崛起的缩影，也为全球科技产业发展提供了中国方案。
+
+## 结语：中国科技企业的创新之路
+
+小米、华为和阿里巴巴代表了不同领域的中国科技企业崛起之路。它们的成功有共同点：强烈的危机意识、持续的技术创新、灵活的商业策略和对用户体验的极致追求。这三家公司都从中国市场的激烈竞争中脱颖而出，然后走向全球，成为各自领域的领导者。
+
+它们的经验表明，中国企业完全可以在全球高科技领域占据重要地位。未来，随着中国科技实力的整体提升，我们有望看到更多像小米、华为和阿里巴巴这样的企业走向世界舞台，为全球科技进步和数字经济发展贡献中国智慧和中国力量。
+</code></pre>
+<p>执行脚本：</p>
+<pre><code>cd /root/autodl-tmp/kefu2/graphrag/dev
+python graphrag_prompt_tune.py 
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-60.png" alt=""><span class="img-wrapper"><img src="./image/6/6-60.png" alt=""></span></label></p>
+<p>提取出来的Prompt内容都跟我们的数据文件相关</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-61.png" alt=""><span class="img-wrapper"><img src="./image/6/6-61.png" alt=""></span></label></p>
+<h4 id="索引构建接口设计"><a class="header" href="#索引构建接口设计">索引构建接口设计</a></h4>
+<ol>
+<li>我们直接先把IS_UPDATE = False，执行索引构建流程</li>
+</ol>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-62.png" alt=""><span class="img-wrapper"><img src="./image/6/6-62.png" alt=""></span></label></p>
+<pre><code class="language-bash">## 修改配置文件
+CONFIG_FILE ="/root/autodl-tmp/kefu2/graphrag/data/settings.yaml"
+## 执行索引构建流程
+python graphrag_indexing.py
+
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-63.png" alt=""><span class="img-wrapper"><img src="./image/6/6-63.png" alt=""></span></label></p>
+<pre><code class="language-bash">## 查询测试
+poetry run poe query --root ./data --method local --query "华为的创始人是谁？"
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-64.png" alt=""><span class="img-wrapper"><img src="./image/6/6-64.png" alt=""></span></label></p>
+<ol start="2">
+<li>企业常见场景分析
+企业常见需求一：如何构建多个索引？
+   多索引构建对应的开发场景大多存在于企业中存在多个数据源支撑多个业务线，彼此之间相对独立，且每个业务线之间存在一定的差异性，比如：数据格式、数据内容、数据规模等，冗余在一起会加重检索的效率和维护成本。（因为知识图谱越大，检索时需要检验的信息就越多，检索的效率就越低），亦或对不同的部门、人员之间的知识库进行隔离，避免知识库之间的相互污染等常见问题。
+这类问题对应的解决方案在当前的流程中非常容易实现：即只需要在构建的时候，通过init的–root参数指定不同的数据源根目录，制定索引文件与数据源的对应关系（如通过字典构建映射关系），形式如下：</li>
+</ol>
+<pre><code>   # 索引文件与数据源的对应关系
+   INDEX_FILE_MAP = {"index_1": "data_source_1","index_2": "data_source_2",}
+</code></pre>
+<p>各个索引知识库独立构建，在进行问答检索时先通过INDEX_FILE_MAP字典找到对应的索引文件根路径，进行加载即可实现多知识库的隔离检索。
+企业常见需求二：多个不同类型的数据源，如何共同创建一个索引？
+  多数据源共建一个知识库的场景，在企业中也比较常见。比如关系型数据库、PDF、Word、Excel、CSV 等不同类型的数据源，希望各个数据源中的有效信息可以实现整合，从而构建一个统一的知识库提供用户、或者下游的智能体使用。
+回顾Microsoft GraphRAG 的索引构建流程，筛选不同文件进入构建索引的Workflow 流程，核心是在settings.yaml 文件中input 参数下借助file_type 参数指定文件类型，以及file_parttern 通过正则表达式的形式过滤符合标准的文件，比如通过(.<em>.txt$) 过滤所有txt 文件。
+那么对于这种过滤文件的方式，大家可能想到的是：既然借助file_type 和file_parttern 参数可以过滤文件，那么是否可以借助file_type 和file_parttern 参数，将不同类型的数据源进行整合，从而构建一个统一的知识库？ 实际上确实可以的，比如指定file_pattern: “.</em>\.(txt|csv)$$” ,即可同时读取input 目录下所有txt 和csv 文件。
+从执行流程上看是可以，但是存在一个非常严重的问题是：无法指定不同文件类型加载对应的优化切分策略。也就是说，input 可以通过 file_type 和 file_pattern 参数指定文件类型和文件过滤规则，但是chunk下的切分策略，将会用于所有文件的切分，也就是说无法实现不同文件类型加载对应的优化切分策略。
+在现有流程上，是不能实现对文件格式和对应的切分策略进行灵活匹配的。因此，这里能得出的结论是：如果大家对所有格式的文件能够容忍使用同一种最简单的切分策略，那么可以直接用file_pattern进行文件过滤。而如果希望针对不同文件类型，加载对应的优化切分策略，则需要引入增量更新的解决方案。
+  增量更新（Incremental Update）指的是在已有知识图谱的基础上，快速更新新加入的知识，避免全量重建。 一些核心的增量更新的实现方法是：</p>
+<ol>
+<li>文档级增量更新：这类方法会对文本内容生成MD5哈希值，在实现增量插入功能时，先检查是否存在相同内容，如果判定为新内容，则重新计算社区结构并生成新的社区报告。代表项目是nano-GraphRAG。</li>
+<li>知识库级增量更新：这类方法会使用图结构管理实体和关系，每次有新文档加入时，会对其执行相同的图索引步骤，包括实体识别和关系提取。通过将新增的节点和边集与原有图的节点和边进行合并（集合并操作），实现新数据的无缝集成，代表项目是LightRAG。
+   Microsoft GraphRAG 在 v0.4.0 版本中引入了增量索引支持，其实现的方法属于知识库级增量更新。
+接下来我们测试一下增量更新的操作</li>
+</ol>
+<pre><code class="language-bash">## 打开增量更新的开关
+IS_UPDATE = True
+## 修改配置文件
+CONFIG_FILE ="/root/autodl-tmp/kefu2/graphrag/data/settings_csv.yaml"
+## 执行索引构建流程
+python graphrag_indexing.py
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-65.png" alt=""><span class="img-wrapper"><img src="./image/6/6-65.png" alt=""></span></label></p>
+<p>测试：</p>
+<pre><code class="language-bash">poetry run poe query --root ./data --method local --query "华为的创始人是谁？"
+
+poetry run poe query --root ./data --method local --query "华成育卓科技有限公司电子商务都购买了哪些产品？"
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-66.png" alt=""><span class="img-wrapper"><img src="./image/6/6-66.png" alt=""></span></label></p>
+<h4 id="查询接口设计"><a class="header" href="#查询接口设计">查询接口设计</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>查询方式</th><th>查询流程</th><th>特点</th></tr>
+</thead>
+<tbody>
+<tr><td>Local</td><td>1. 从用户查询中抽取关键词或实体<br>2. 在图谱中找到相关的局部子图（与这些实体直接相连的节点与边）<br>3. 从局部子图召回文档片段<br>4. 将召回的内容与用户问题结合后，交给大模型生成答案</td><td>- 聚焦在“邻域”范围，效率高<br>- 回答更具体、更贴近用户问题<br>- 但容易受限于局部上下文，缺乏整体视角</td></tr>
+<tr><td>Global</td><td>1. 从查询中提炼全局主题或核心问题<br>2. 在图谱全局范围中检索主题相关的社区/群落<br>3. 结合全局摘要或社区表示信息<br>4. 大模型基于全局信息生成答案</td><td>- 从整体出发，适合宏观、总结类问题<br>- 能提供更全面的视角<br>- 但可能缺少细节，回答偏笼统</td></tr>
+<tr><td>Drift</td><td>1. 要求LLM基于用户查询生成一个假设性的答案（即使这个答案可能是错误的或未被证实的）。<br>2. 将这个假设性答案转换为向量，并用它去知识图谱中进行检索。<br>3. 检索出与这个假设最相关的实体和社区信息作为证据。<br>4. LLM根据检索到的证据来评估、修正或支持最初生成的假设，最终形成一个有根据的答案。</td><td>· “大胆假设，小心求证”：通过假设引导检索方向。<br>· 非常适合处理复杂、开放或需要推理的问题，传统检索方式可能找不到直接答案。<br>· 能探索“如果”式的问题和概念之间的新颖联系。<br>适用场景：<br>· 复杂的因果分析（例如：“如果某事件没发生，会有什么影响？”）。<br>· 需要多步推理的开放域问题（例如：“某项技术未来将如何发展？”）。<br>· 发现非显而易见的见解和联系。</td></tr>
+<tr><td>Basic</td><td>1. 不利用图结构，只在底层文档（chunks/向量库）中做语义检索<br>2. 召回若干相关文档片段<br>3. 交给大模型回答问题</td><td>- 最接近传统 RAG 的方式<br>- 简单直接，效果稳定<br>- 但无法利用知识图谱结构优势，缺少推理能力</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="前后端接口联调测试"><a class="header" href="#前后端接口联调测试">前后端接口联调测试</a></h4>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-67.png" alt=""><span class="img-wrapper"><img src="./image/6/6-67.png" alt=""></span></label></p>
+<h2 id="企业级智能客服整体架构全流程落地"><a class="header" href="#企业级智能客服整体架构全流程落地">企业级智能客服整体架构全流程落地</a></h2>
+<h3 id="智能客服-multi-agent-架构设计"><a class="header" href="#智能客服-multi-agent-架构设计">智能客服 Multi Agent 架构设计</a></h3>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-68.png" alt=""><span class="img-wrapper"><img src="./image/6/6-68.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-69.png" alt=""><span class="img-wrapper"><img src="./image/6/6-69.png" alt=""></span></label></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>步骤</th><th>动作</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>配置DeepSeek模型</td></tr>
+<tr><td>2</td><td>配置Ollama模型</td></tr>
+<tr><td>3</td><td>配置GraphRAG参数</td></tr>
+<tr><td>4</td><td>配置SerpAPI</td></tr>
+<tr><td>5</td><td>配置MySQL</td></tr>
+<tr><td>6</td><td>配置Neo4j数据库</td></tr>
+<tr><td>7</td><td>配置Redis</td></tr>
+<tr><td>8</td><td>配置GraphRAG位置</td></tr>
+<tr><td>9</td><td>构建虚拟环境</td></tr>
+<tr><td>10</td><td>初始化MySQL数据库</td></tr>
+<tr><td>11</td><td>启动项目：python run.py</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="智能客服意图识别设计"><a class="header" href="#智能客服意图识别设计">智能客服意图识别设计</a></h3>
+<pre><code class="language-bash">ROUTER_SYSTEM_PROMPT = """你是一个电商领域的智能客服。你的工作是帮助用户解决与产品、订单、售后和技术支持相关的问题。
+
+用户会向你提出询问。你的首要任务是对询问类型进行分类。你必须将用户询问的问题分类为以下类型之一：
+
+## `general-query`
+如果是一般性问题，不需要查询知识库就能回答，请将其分类为此类。
+包括但不限于：
+- 与商品、订单、售后、技术支持无关的闲聊问题
+
+## `additional-query`
+如果你需要更多信息才能帮助用户，请将用户询问分类为此类。例如：
+- 用户询问商品但没有提供具体型号或规格
+- 用户询问订单状态但没有提供订单号
+- 用户描述问题不够具体，无法提供准确帮助
+
+## `graphrag-query`
+如果通过查询本地知识库可以回答用户询问，请将其分类为此类。
+包括但不限于：
+- 商品价格、库存、规格等信息查询
+- 订单状态、物流信息查询
+- 会员积分、优惠活动查询
+- 退换货政策咨询
+- 商品使用指导及故障解决方法
+
+## `image-query`
+如果用户提供了图片请求提供图片，请将其分类为此类。
+
+
+## `file-query`
+如果用户上传了文件，请将其分类为此类。
+"""
+</code></pre>
+<h3 id="智能客服普通问答流程"><a class="header" href="#智能客服普通问答流程">智能客服普通问答流程</a></h3>
+<pre><code># 一般查询提示，即用户的问题与电商、产品、订单、技术支持无关
+GENERAL_QUERY_SYSTEM_PROMPT = """你是一个电商领域的智能客服。你的工作是帮助用户解决与产品、订单、售后和技术支持相关的问题。
+
+请以类似淘宝/京东等知名电商客服的风格回复用户，遵循以下规则：
+
+## 基本礼仪
+1. 开场必须用"亲～"或"顾客您好～"问候
+2. 使用积极、温暖的语气
+3. 适当使用emoji表情（如 👋 😊 ❤️）增加亲和力
+4. 结尾必须表达感谢和继续服务的意愿
+
+## 回复策略
+如果用户问题模糊不清：
+1. 先表示理解和重视："感谢您的咨询～"
+2. 友好地指出不明确之处："不过亲，为了能更好地帮助您..."
+3. 引导用户提供更具体信息："您能告诉我具体是..."
+4. 给出一些示例："比如说，您是想问..."
+
+## 如果问题与电商业务无关：
+1. 先表示感谢："感谢您的咨询～"
+2. 委婉说明情况："不好意思呢亲，这个问题可能不太属于我们的业务范围..."
+3. 建议其他帮助渠道："您可以尝试咨询相关专业的平台/机构..."
+4. 表达歉意和继续服务意愿："如果您有任何关于我们商品或服务的问题，随时欢迎询问哦～"
+
+## 回复要点
+- 保持专业性：提供清晰、准确的信息
+- 给出建议：在可能的情况下提供实用的解决方案
+- 态度温和：即使是拒绝也要保持友好
+- 预设期待：为后续可能的咨询留下互动空间
+
+## 示例回复格式
+
+### 模糊问题示例：
+"亲～感谢您的咨询～😊 为了能更准确地帮助您，麻烦您能告诉我具体是哪款商品呢？这样我才能...（根据具体情况询问）"
+
+### 无关问题示例：
+"亲～感谢您的咨询～😊 非常抱歉呢，这个问题可能不太属于我们的业务范围，建议您可以...（给出建议）。如果您有任何关于我们商品或服务的问题，随时欢迎询问哦～❤️"
+
+系统已确定用户正在提出一般性问题，不需要查询特定数据库即可回答。以下是分类理由：
+
+&lt;logic&gt;
+{logic}
+&lt;/logic&gt;
+
+记住：无论是哪种情况，都要保持亲切、专业的语气，让用户感受到被重视和理解。
+同时，尽量保持回复的简洁性，不要过于冗长，尽量限制在20个字以内。
+"""
+</code></pre>
+<h3 id="智能客服安全护栏设计"><a class="header" href="#智能客服安全护栏设计">智能客服安全护栏设计</a></h3>
+<pre><code>GUARDRAILS_SYSTEM_PROMPT = """
+你是企业产品信息与订单管理系统中的范围检查组件。
+你的职责是确定用户的问题是否在系统的处理范围内。
+
+请遵循以下规则：
+1. 如果问题与企业商品信息与订单管理相关，包括但不限于：
+   - 商品信息查询
+   - 商品分类信息
+   - 供应商信息
+   - 客户信息
+   - 订单信息和状态
+   - 员工信息
+   - 物流信息
+
+如果相关，请仅输出："continue"
+2. 如果问题明显与企业商品信息与订单管理无关（如政治、娱乐、天气等），请仅输出："end"
+3. 如产生疑问，请假设问题可能相关，宁可错误地接受也不要错误地拒绝
+4. 在做决定时，请严格按照系统的数据库结构来判断，如果不相关，则不属于经营范围，请输出："end"
+5. 仅输出指定的结果："continue"或"end"
+"""
+</code></pre>
+<pre><code>GET_ADDITIONAL_SYSTEM_PROMPT = """你是一个专业的电商客服助手。你的工作是帮助用户解决各种电商相关问题。
+
+你应该使用亲切、专业的语气，类似淘宝和京东的客服风格：
+1. 称呼用户为"亲"或"顾客"
+2. 使用礼貌用语，如"请问"、"麻烦"、"感谢"等
+3. 保持积极正面的语气
+4. 适当使用emoji表情，让对话更亲和
+5. 结尾要表达感谢和继续服务的意愿
+
+
+系统确定在为用户提供帮助前需要更多信息。以下是分类理由：
+
+&lt;logic&gt;
+{logic}
+&lt;/logic&gt;
+
+请友好地向用户询问所需的额外信息。表达理解用户需求的意愿，并明确说明需要哪些信息才能更好地提供帮助。提问要具体，一次只问一个问题，避免让用户感到困惑。
+注意：同样要保持简短，尽量限制在20个字以内。
+"""
+</code></pre>
+<h3 id="智能客服混合知识库设计"><a class="header" href="#智能客服混合知识库设计">智能客服混合知识库设计</a></h3>
+<ol>
+<li>问题拆解</li>
+</ol>
+<pre><code>PLANNER_SYSTEM_PROMPT = """
+你是一个电商平台智能客服系统中的任务规划组件。
+你的职责是分析用户的查询，并将其拆分为独立的子任务。
+
+请遵循以下规则：
+1. 如果问题可以拆分为多个独立子任务，返回这些子任务列表
+2. 如果问题很简单，不需要拆分，则返回一个只包含原问题的列表
+3. 子任务之间应该是独立的，不要相互依赖
+4. 确保子任务不会返回重复或相似的信息
+5. 将相互依赖的任务合并为一个问题
+6. 将返回相同信息的任务合并为一个问题
+
+示例：
+- 问题："北风商贸有哪些饮料类产品？它们的价格是多少？"
+  子任务：["北风商贸有哪些饮料类产品？", "北风商贸饮料类产品的价格是多少？"]
+
+- 问题："谁是处理了订单10248的员工？这个订单发往哪里？"
+  子任务：["谁是处理了订单10248的员工？", "订单10248的配送信息是什么？"]
+
+- 问题："供应商Exotic Liquids提供了哪些产品？这些产品的库存情况如何？"
+  子任务：["供应商Exotic Liquids提供了哪些产品？", "Exotic Liquids供应的产品库存情况如何？"]
+
+- 问题："订单10248包含哪些产品？这些产品是哪家供应商提供的？"
+  子任务：["订单10248包含哪些产品？", "订单10248中的产品分别由哪些供应商提供？"]
+
+- 问题："茶叶产品的使用说明手册在哪里可以找到？"
+  子任务：["茶叶产品的使用说明手册在哪里？"]
+
+- 问题："客户对北风商贸巧克力产品的评价如何？"
+  子任务：["客户对北风商贸巧克力产品的评价？"]
+"""
+
+</code></pre>
+<ol start="2">
+<li>工具选择</li>
+</ol>
+<pre><code>TOOL_SELECTION_SYSTEM_PROMPT = """
+你是一个电商平台智能客服系统中的工具选择组件。你的职责是根据用户的问题选择合适的工具。
+你默认应该选择text2cypher工具，除非其他的工具完全匹配用户输入的问题。
+"""
+</code></pre>
+<pre><code>class cypher_query(BaseModel):
+    """如果用户问的是关于产品价格、库存、规格等，则使用这个工具，生成Cypher查询语句进行查询"""
+
+    task: str = Field(..., description="The task the Cypher query must answer.")
+</code></pre>
+<pre><code>class predefined_cypher(BaseModel):
+    """这个工具包含预定义的Cypher查询语句，用于快速响应各种电商场景的查询需求。
+    
+    根据用户问题的类型，可以选择以下类别的查询：
+    
+    1. 产品类查询：
+       - product_by_name: 通过产品名称查询产品信息
+       - product_by_category: 通过类别名称查询该类别下的所有产品
+       - product_by_supplier: 查询特定供应商提供的所有产品
+       - products_low_stock: 查询库存不足的产品
+       - products_popular: 查询最受欢迎(评论最多)的产品
+    
+    2. 客户类查询：
+       - customer_by_name: 通过名称查询客户信息
+       - customer_orders: 查询特定客户的所有订单
+       - customer_purchase_history: 查询特定客户的购买历史
+    
+    3. 订单类查询：
+       - order_by_id: 通过订单ID查询订单信息
+       - order_details: 查询特定订单的详细信息(包含的产品)
+       - recent_orders: 查询最近的订单
+       - delayed_orders: 查询延迟发货的订单
+    
+    4. 供应商类查询：
+       - supplier_by_country: 查询特定国家的供应商
+       - supplier_products: 查询特定供应商提供的所有产品
+    
+    5. 类别类查询：
+       - all_categories: 查询所有产品类别
+       - category_products: 查询特定类别下的所有产品
+       - category_product_count: 查询每个类别包含的产品数量
+    
+    6. 员工类查询：
+       - employee_by_name: 通过姓名查询员工信息
+       - employee_processed_orders: 查询特定员工处理的所有订单
+    
+    7. 评论类查询：
+       - product_reviews: 查询特定产品的所有评论
+       - top_rated_products: 查询评分最高的产品
+    
+    8. 销售分析类查询：
+       - product_sales: 查询特定产品的总销售额
+       - category_sales: 查询各类别的总销售额
+       - monthly_sales: 查询每月的销售情况
+    
+    9. 智能家居相关查询：
+       - smart_home_products: 查询所有智能家居产品
+       - smart_speakers: 查询智能音箱类产品
+       - smart_lighting: 查询智能照明类产品
+    
+    请根据用户的问题选择最合适的查询，并根据需要替换查询中的参数值（如$product_name, $category_name等）。
+    """
+
+    query: str = Field(..., description="query the graph must include the question")
+    parameters: dict = Field(..., description="parameters for the query to Neo4j")
+</code></pre>
+<pre><code>class microsoft_graphrag_query(BaseModel):
+    """如果用户问的问题是关于产品的故障、售后、保修、维修、退换货以及评价等，则使用这个工具"""
+    query: str = Field(..., description="query the graph must include the question")
+</code></pre>
+<h3 id="智能客服text2code功能设计"><a class="header" href="#智能客服text2code功能设计">智能客服Text2Code功能设计</a></h3>
+<ol>
+<li>整体的图</li>
+</ol>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-70.png" alt=""><span class="img-wrapper"><img src="./image/6/6-70.png" alt=""></span></label></p>
+<ol start="2">
+<li>核心关注路由</li>
+</ol>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-71.png" alt=""><span class="img-wrapper"><img src="./image/6/6-71.png" alt=""></span></label></p>
+<p>分类提示词</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-72.png" alt=""><span class="img-wrapper"><img src="./image/6/6-72.png" alt=""></span></label></p>
+<p>返回结果：</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-73.png" alt=""><span class="img-wrapper"><img src="./image/6/6-73.png" alt=""></span></label></p>
+<ol start="3">
+<li>关注条件边</li>
+</ol>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-74.png" alt=""><span class="img-wrapper"><img src="./image/6/6-74.png" alt=""></span></label></p>
+<ol start="4">
+<li>第一种逻辑：普通问答</li>
+</ol>
+<p>respond_to_general_query</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-75.png" alt=""><span class="img-wrapper"><img src="./image/6/6-75.png" alt=""></span></label></p>
+<ol start="5">
+<li>第二种逻辑：get_additional_info</li>
+</ol>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-76.png" alt=""><span class="img-wrapper"><img src="./image/6/6-76.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-77.png" alt=""><span class="img-wrapper"><img src="./image/6/6-77.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-78.png" alt=""><span class="img-wrapper"><img src="./image/6/6-78.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-79.png" alt=""><span class="img-wrapper"><img src="./image/6/6-79.png" alt=""></span></label></p>
+<ol start="6">
+<li>任务拆解：create_research_plan</li>
+</ol>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-80.png" alt=""><span class="img-wrapper"><img src="./image/6/6-80.png" alt=""></span></label></p>
+<p>安全护栏</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-81.png" alt=""><span class="img-wrapper"><img src="./image/6/6-81.png" alt=""></span></label></p>
+<p>拆解子任务</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-82.png" alt=""><span class="img-wrapper"><img src="./image/6/6-82.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-83.png" alt=""><span class="img-wrapper"><img src="./image/6/6-83.png" alt=""></span></label></p>
+<p>并行查询</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-84.png" alt=""><span class="img-wrapper"><img src="./image/6/6-84.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-85.png" alt=""><span class="img-wrapper"><img src="./image/6/6-85.png" alt=""></span></label></p>
+<p>工具选择节点</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-86.png" alt=""><span class="img-wrapper"><img src="./image/6/6-86.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-87.png" alt=""><span class="img-wrapper"><img src="./image/6/6-87.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-88.png" alt=""><span class="img-wrapper"><img src="./image/6/6-88.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-89.png" alt=""><span class="img-wrapper"><img src="./image/6/6-89.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-90.png" alt=""><span class="img-wrapper"><img src="./image/6/6-90.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-91.png" alt=""><span class="img-wrapper"><img src="./image/6/6-91.png" alt=""></span></label></p>
+<p>工具节点1：predefined_cypher</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-92.png" alt=""><span class="img-wrapper"><img src="./image/6/6-92.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-93.png" alt=""><span class="img-wrapper"><img src="./image/6/6-93.png" alt=""></span></label></p>
+<p>工具节点2：cypher_query</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-94.png" alt=""><span class="img-wrapper"><img src="./image/6/6-94.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-95.png" alt=""><span class="img-wrapper"><img src="./image/6/6-95.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-96.png" alt=""><span class="img-wrapper"><img src="./image/6/6-96.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-97.png" alt=""><span class="img-wrapper"><img src="./image/6/6-97.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-98.png" alt=""><span class="img-wrapper"><img src="./image/6/6-98.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-99.png" alt=""><span class="img-wrapper"><img src="./image/6/6-99.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-100.png" alt=""><span class="img-wrapper"><img src="./image/6/6-100.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-101.png" alt=""><span class="img-wrapper"><img src="./image/6/6-101.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-102.png" alt=""><span class="img-wrapper"><img src="./image/6/6-102.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-103.png" alt=""><span class="img-wrapper"><img src="./image/6/6-103.png" alt=""></span></label></p>
+<p>工具节点3：customer_tools</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-104.png" alt=""><span class="img-wrapper"><img src="./image/6/6-104.png" alt=""></span></label></p>
+<p>总结节点</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-105.png" alt=""><span class="img-wrapper"><img src="./image/6/6-105.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-106.png" alt=""><span class="img-wrapper"><img src="./image/6/6-106.png" alt=""></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-107.png" alt=""><span class="img-wrapper"><img src="./image/6/6-107.png" alt=""></span></label></p>
+<h2 id="总体问答效果"><a class="header" href="#总体问答效果">总体问答效果</a></h2>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./image/6/6-108.png" alt=""><span class="img-wrapper"><img src="./image/6/6-108.png" alt=""></span></label></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="5.智能客服之模型部署.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="7.智能客服之项目联调.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="5.智能客服之模型部署.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="7.智能客服之项目联调.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
